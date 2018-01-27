@@ -12,32 +12,44 @@ public class BingoBoard : MonoBehaviour {
 
     private FoodItem.FoodTypes[] goalboard;
 
-    
+    private GameController gc;
+
+
 
 
     //called before Start
     private void Awake()
     {
-
+        //initialize the values
         myboard = new BitArray(25);
         solutions = new BitArray[12];
         goalboard = new FoodItem.FoodTypes[25];
 
+
+        //generate the array of bingo solutions
         GenerateSolutions();
-       
+
+
+        //generate your card
+        GenerateRandomBoard();
+
     }
 
 
     // Use this for initialization
     void Start () {
-
+        gc = GameController.instance;
 
         //DebugCheckBoard();
 
 
-        GenerateRandomBoard();
-        DebugPrintGoal();
-        
+       
+
+
+        //DebugPrintGoal();
+
+        //AddItem(FoodItem.FoodTypes.eggs);
+        //DebugPrintBoard(myboard);
 
         
 	}

@@ -7,6 +7,8 @@ public class FoodItem : MonoBehaviour {
 
     public enum FoodTypes { eggs, milk, seasoning, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z  }
 
+    
+
 
     private FoodTypes current_food;
 
@@ -21,10 +23,15 @@ public class FoodItem : MonoBehaviour {
     private float countdowntimer;
     private float decaytime = 5f;
 
+    private GameController gc;
+
 
 	// Use this for initialization
-	void Start () {
+	void Start() { 
+         gc = GameController.instance;
+        //SetFoodType(FoodTypes.milk);
         StartDecay();
+
 	}
 	
 	// Update is called once per frame
@@ -64,6 +71,8 @@ public class FoodItem : MonoBehaviour {
     public void SetFoodType(FoodTypes newtype)
     {
         current_food = newtype;
+        foodSR.sprite = gc.foodSprites[(int)newtype];
+
     }
 
     //for when food lands on the floor - start the 5 second rule countdown
@@ -84,7 +93,7 @@ public class FoodItem : MonoBehaviour {
         return isDecaying;
     }
 
-
+    //return how much (0f-1f) the food has decayed
     public float GetDecayPercentage()
     {
         return Mathf.Clamp01((decaytime - countdowntimer) / decaytime);

@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSR: {fileID: 212443566749216498}
+  DecayColor: {r: 0.5514706, g: 0.2852434, b: 0, a: 1}
 --- !u!212 &212443566749216498
 SpriteRenderer:
   m_ObjectHideFlags: 1
