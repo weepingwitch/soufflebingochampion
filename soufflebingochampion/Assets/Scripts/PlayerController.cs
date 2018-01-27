@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour {
 
     private Vector2 aim = Vector2.right;
 
-    public float movespeed = 4f;
-    public float throwstrength = 3f;
+    private float movespeed = 4f;
+    private float throwstrength = 3f;
 
     private float throwcountdown;
     private float throwtime = .25f;
@@ -97,6 +97,16 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        //Debug.Log(collision.gameObject.tag);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+       // Debug.Log(collision.gameObject.tag + " t");
+    }
 
     public void doThrow(Vector2 throwdirect)
     {
