@@ -4,6 +4,13 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
+/soufflebingochampion/[Ll]ibrary/
+/soufflebingochampion/[Tt]emp/
+/soufflebingochampion/[Oo]bj/
+/soufflebingochampion/[Bb]uild/
+/soufflebingochampion/[Bb]uilds/
+/soufflebingochampion/Assets/AssetStoreTools*
+
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -32,3 +39,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Potential OS generated files
+.DS_Store*
+.Spotlight-V100
+.Trashes
+[Tt]humbs.db
