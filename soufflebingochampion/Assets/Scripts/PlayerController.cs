@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour {
             thrown.layer = 9;
         }
         var foodc = thrown.GetComponent<FoodItem>();
-        foodc.SetFoodType(heldFood);
+        foodc.SetFoodType(heldFood,isdropped);
         foodc.owner = playerNum;
         if (!isdropped)
         {
