@@ -6,15 +6,25 @@ public class BingoBoard : MonoBehaviour {
 
     private int myid;
 
+    private bool[] myboard;
 
 
-	// Use this for initialization
-	void Start () {
-		
+    //called before Start
+    private void Awake()
+    {
+        myboard = new bool[25];
+
+    }
+
+
+    // Use this for initialization
+    void Start () {
+        DebugBoard();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+   
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -56,6 +66,27 @@ public class BingoBoard : MonoBehaviour {
 
     }
 
+    //output board value
+    private void DebugBoard()
+    {
+#if UNITY_EDITOR
+        string boardstr = "";
+        foreach (bool bit in myboard)
+        {
+            if (bit)
+            {
+                boardstr += "1";
+            }
+            else
+            {
+                boardstr += "0";
+            }
+        }
+
+        Debug.Log(boardstr);
+        #endif
+    }
+
 
     //called upon updating board, to check for a bingo
     private bool CheckForBingo()
@@ -64,8 +95,20 @@ public class BingoBoard : MonoBehaviour {
 
 
 
+
+        //do the bingo checking logic here lol
+
         return result;
 
+    }
+
+    //still working on this, not sure if it will work yet lol
+    private bool CheckSolution(int mycard, int[] solutions)
+    {
+        for (int i = 0; i < solutions.Length; i++)
+            if (solutions[i] == (mycard & solutions[i]))
+                return true;
+        return false;
     }
 
 }
