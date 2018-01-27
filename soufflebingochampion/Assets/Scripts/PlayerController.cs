@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D rb2d;
     [SerializeField]
-    private SpriteRenderer pimg, aimIndicator;
+    private SpriteRenderer pimg, aimIndicator, heldItemImg;
     [SerializeField]
     private GameObject foodBase;
 
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     private float throwCountdown;
     private float throwTime = .25f;
 
+    private Vector3 dropOffset;
    
 
     private bool readyToThrow = true;
@@ -55,7 +56,9 @@ public class PlayerController : MonoBehaviour {
             heldFood = FoodItem.FoodTypes.eggs;
         }
 
-	}
+        heldItemImg.sprite = gc.foodSprites[(int)heldFood];
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -71,7 +74,7 @@ public class PlayerController : MonoBehaviour {
             aim = aimdirect.normalized;
 
                 pimg.flipX = (aim.x < 0);
-            
+           
         }
         else if (Mathf.Abs(movevect.magnitude) > .1f)
         {
@@ -82,6 +85,25 @@ public class PlayerController : MonoBehaviour {
         //handle aim indicator
         aimIndicator.transform.localPosition = aim;
         aimIndicator.transform.up = aim;
+
+
+        //handle currently held item
+        if (holdingFood)
+        {
+            heldItemImg.enabled = true;
+            if (pimg.flipX)
+            {
+                heldItemImg.transform.localPosition = new Vector3(.1f, -.3f, 0);
+            }
+            else
+            {
+                heldItemImg.transform.localPosition = new Vector3(-.1f, -.3f, 0);
+            }
+        }
+        else
+        {
+            heldItemImg.enabled = false;
+        }
 
 
         //handle throwing
@@ -140,19 +162,22 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
+    //called when hit by a food
     private void dostun(FoodItem hitfood, Vector3 stunDirect)
     {
 
+        Destroy(hitfood.gameObject);
+
         if (holdingFood)
         {
+            dropOffset = -stunDirect/2f;
             doThrow(Vector2.zero, true);
         }
 
 
-        Destroy(hitfood.gameObject);
+        
 
-        rb2d.AddForce(stunDirect * 500f);
+        rb2d.AddForce(stunDirect * 2000f);
     }
 
 
@@ -167,6 +192,8 @@ public class PlayerController : MonoBehaviour {
         {
             holdingFood = true;
             heldFood = newfood.GetFoodType();
+            heldItemImg.sprite = gc.foodSprites[(int)heldFood];
+            //Debug.Log(playerNum + " picked up a " + heldFood);
             Destroy(newfood.gameObject);
         }
 
@@ -190,6 +217,10 @@ public class PlayerController : MonoBehaviour {
         if (!isdropped)
         {
             foodc.throwfood(throwdirect * throwStrength);
+        }
+        else
+        {
+            thrown.transform.position += dropOffset;
         }
        
 
