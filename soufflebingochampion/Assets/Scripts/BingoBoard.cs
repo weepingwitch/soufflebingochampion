@@ -6,20 +6,27 @@ public class BingoBoard : MonoBehaviour {
 
     private int myid;
 
-    private bool[] myboard;
+    private BitArray myboard;
+
+    private BitArray[] solutions;
 
 
     //called before Start
     private void Awake()
     {
-        myboard = new bool[25];
 
+        myboard = new BitArray(25);
+        solutions = new BitArray[12];
+       
     }
 
 
     // Use this for initialization
     void Start () {
-        DebugBoard();
+        //DebugPrintBoard();
+        //Debug.Log(ConvertBitArray(myboard));
+
+        DebugCheckBoard();
 	}
 
    
@@ -67,7 +74,7 @@ public class BingoBoard : MonoBehaviour {
     }
 
     //output board value
-    private void DebugBoard()
+    private void DebugPrintBoard()
     {
 #if UNITY_EDITOR
         string boardstr = "";
@@ -88,27 +95,65 @@ public class BingoBoard : MonoBehaviour {
     }
 
 
-    //called upon updating board, to check for a bingo
-    private bool CheckForBingo()
+    //check bingochecker
+    private void DebugCheckBoard()
     {
-        bool result = false;
+#if UNITY_EDITOR
+        myboard.Set(3, true);
+        myboard.Set(8, true);
 
 
+        solutions[0] = new BitArray(25);
+        solutions[0].Set(2, true);
 
+        solutions[1] = new BitArray(25);
+        solutions[1].Set(8, true);
 
-        //do the bingo checking logic here lol
+        
+        Debug.Log("test 0 - should be true: " + CheckForBingo());
+        myboard.Set(8, false);
+        Debug.Log("test 1 - should be false: " + CheckForBingo());
 
-        return result;
-
+#endif
     }
 
+
+
+
+
+    //called upon updating board, to check for a bingo
     //still working on this, not sure if it will work yet lol
-    private bool CheckSolution(int mycard, int[] solutions)
+    private bool CheckForBingo()
     {
+        int cursolution = 0;
+
+
+        int mycardint = ConvertBitArray(myboard);
+
+
         for (int i = 0; i < solutions.Length; i++)
-            if (solutions[i] == (mycard & solutions[i]))
+        {
+
+            cursolution = ConvertBitArray(solutions[i]);
+            if (cursolution == (mycardint & cursolution))
                 return true;
+        }
         return false;
+    }
+
+
+
+    //convert bitarray to int
+    private int ConvertBitArray(BitArray mybits)
+    {
+        if (mybits == null)
+            return -1;
+        if (mybits.Length > 32)
+            return -2;
+
+        var result = new int[1];
+        mybits.CopyTo(result, 0);
+        return result[0];
     }
 
 }
