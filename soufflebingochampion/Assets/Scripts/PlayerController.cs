@@ -97,18 +97,53 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-
+    //this will happen for other players
     private void OnCollisionStay2D(Collision2D collision)
     {
+
         //Debug.Log(collision.gameObject.tag);
     }
 
+
+    //this will happen for food
     private void OnTriggerStay2D(Collider2D collision)
     {
        // Debug.Log(collision.gameObject.tag + " t");
+
+        if (collision.gameObject.CompareTag("fooditem"))
+        {
+            var thefood = collision.gameObject.GetComponent<FoodItem>();
+            if (thefood != null)
+            {
+                if (!thefood.isbeingthrown)
+                {
+                    pickupFood(thefood);
+                }
+                else
+                {
+                    dostun(thefood);
+                }
+           
+            }
+        }
     }
 
-    public void doThrow(Vector2 throwdirect)
+
+    private void dostun(FoodItem hitfood)
+    {
+
+    }
+
+
+    private void pickupFood(FoodItem newfood)
+    {
+
+
+
+    }
+
+
+    private void doThrow(Vector2 throwdirect)
     {
         var thrown = Instantiate(foodBase);
         thrown.transform.position = transform.position;

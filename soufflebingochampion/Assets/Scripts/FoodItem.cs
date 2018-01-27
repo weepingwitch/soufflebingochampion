@@ -35,7 +35,7 @@ public class FoodItem : MonoBehaviour {
     private GameController gc;
 
 
-    private bool isbeingthrown = true;
+    public bool isbeingthrown = true;
 
 	// Use this for initialization
 	void Start() { 
