@@ -30,7 +30,9 @@ public class FoodItem : MonoBehaviour {
     private float throwtime;
     private float throwtimer;
     private Vector2 origvel;
-    
+
+
+    public int owner;
 
     private GameController gc;
 

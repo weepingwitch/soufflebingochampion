@@ -6,10 +6,15 @@ public class Stove : MonoBehaviour {
 
     [SerializeField]
     private BingoBoard myBoard;
+    [SerializeField]
+    private int ownerNum;
+
+
+    private GameController gc;
 
 	// Use this for initialization
 	void Start () {
-		
+        gc = GameController.instance;
 	}
 	
 	// Update is called once per frame
@@ -28,8 +33,9 @@ public class Stove : MonoBehaviour {
             var theFood = collision.gameObject.GetComponent<FoodItem>();
             if (theFood != null)
             {
-                if (!theFood.IsCurrentlyDecaying())
+                if (!theFood.IsCurrentlyDecaying() && theFood.owner == ownerNum)
                 myBoard.AddItem(theFood.GetFoodType());
+                
                 Destroy(theFood.gameObject);
             }
         }

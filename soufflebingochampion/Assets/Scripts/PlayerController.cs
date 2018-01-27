@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour {
     private float throwTime = .25f;
 
     private Vector3 dropOffset;
+
+    private Vector2 pushDirect;
+    private float pushcount;
    
 
     private bool readyToThrow = true;
@@ -65,6 +68,13 @@ public class PlayerController : MonoBehaviour {
         //handle movement
         Vector2 movevect = im.getPlayerMove(playerNum);
         rb2d.velocity = movevect * moveSpeed;
+
+        //handle being pushed
+        if (pushcount > 0)
+        {
+            pushcount -= Time.deltaTime;
+            rb2d.velocity += pushDirect;
+        }
         
         //handle aiming and sprite direction
         Vector2 aimdirect = im.getPlayerAim(playerNum);
@@ -174,9 +184,10 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        
 
-        rb2d.AddForce(stunDirect * 2000f);
+        pushDirect = stunDirect*4f;
+        pushcount = .15f;
+       
     }
 
 
@@ -213,6 +224,7 @@ public class PlayerController : MonoBehaviour {
         }
         var foodc = thrown.GetComponent<FoodItem>();
         foodc.SetFoodType(heldFood);
+        foodc.owner = playerNum;
         if (!isdropped)
         {
             foodc.throwfood(throwdirect * throwStrength);
