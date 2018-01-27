@@ -18,25 +18,74 @@ public class FoodItem : MonoBehaviour {
     [SerializeField]
     private Color DecayColor;
 
+    [SerializeField]
+    private Rigidbody2D rb2d;
+
     private bool isDecaying;
 
     private float countdowntimer;
     private float decaytime = 5f;
 
+
+    private float throwtime;
+    private float throwtimer;
+    private Vector2 origvel;
+    
+
     private GameController gc;
 
+
+    private bool isbeingthrown = true;
 
 	// Use this for initialization
 	void Start() { 
          gc = GameController.instance;
         //SetFoodType(FoodTypes.milk);
-        StartDecay();
+
+        throwfood(Vector2.left*2f);
+        
+ 
 
 	}
+
+    //call this to throw the food
+    public void throwfood(Vector2 direct)
+    {
+
+        rb2d.velocity = direct;
+        origvel = direct;
+        throwtime = direct.magnitude;
+        throwtimer = throwtime;
+        isbeingthrown = true;
+        
+
+    }
+
 	
 	// Update is called once per frame
 	void Update () {
 		
+        if (isbeingthrown)
+        {
+            throwtimer -= Time.deltaTime;
+            if (throwtimer < 1f)
+            {
+                rb2d.velocity = Vector2.Lerp(origvel, Vector2.zero, 1-throwtimer);
+
+                if (throwtimer <= 0f)
+                {
+                    isbeingthrown = false;
+                    rb2d.velocity = Vector2.zero;
+                    StartDecay();
+                }
+
+            }
+
+            
+            
+        }
+
+
 
         //process decaying food
         if (isDecaying)

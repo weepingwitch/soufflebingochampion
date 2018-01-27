@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!50 &435827876 stripped
+Rigidbody2D:
+  m_PrefabParentObject: {fileID: 50006860808458824, guid: f61ecf6d1c87c1847baa0d004f83aa5d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1140020879}
 --- !u!1001 &520052670
 Prefab:
   m_ObjectHideFlags: 0
@@ -200,6 +205,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1813284550702038, guid: f61ecf6d1c87c1847baa0d004f83aa5d, type: 2}
+      propertyPath: m_TagString
+      value: fooditem
+      objectReference: {fileID: 0}
+    - target: {fileID: 114806111659184758, guid: f61ecf6d1c87c1847baa0d004f83aa5d,
+        type: 2}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 435827876}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f61ecf6d1c87c1847baa0d004f83aa5d, type: 2}
   m_IsPrefabParent: 0
