@@ -14,8 +14,7 @@ public class BingoSquare : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        check = Instantiate(checkPrefab);
-        check.transform.localPosition = transform.localPosition;
+        check = Instantiate(checkPrefab, transform);
         check.enabled = false;
 	}
 
@@ -28,7 +27,9 @@ public class BingoSquare : MonoBehaviour {
         }
 
         foodObject = new GameObject("foodItem");
-        foodObject.transform.localPosition = transform.localPosition;
+        foodObject.transform.parent = transform;
+        foodObject.transform.localPosition = new Vector3(0, 0, 0);
+        foodObject.transform.localScale = new Vector3(1, 1, 1);
         foodSpriteRenderer = foodObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
         foodSpriteRenderer.sortingOrder = 5;
         foodSpriteRenderer.sprite = gc.foodSprites[(int)newfood];

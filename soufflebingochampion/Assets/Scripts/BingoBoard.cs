@@ -90,7 +90,7 @@ public class BingoBoard : MonoBehaviour {
         {
             //will need to change this logic once we have more foods
             goalboard[i] = randomlist[i];
-            squares[i] = Instantiate(squareBase);
+            squares[i] = Instantiate(squareBase, transform);
             squares[i].transform.localPosition = new Vector3(i/5, i%5, 0);
             squares[i].setfood(randomlist[i]);
         }
