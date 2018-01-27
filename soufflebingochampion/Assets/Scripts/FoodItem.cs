@@ -35,7 +35,7 @@ public class FoodItem : MonoBehaviour {
     private GameController gc;
 
 
-    public bool isbeingthrown = true;
+    public bool isbeingthrown = false;
 
 	// Use this for initialization
 	void Start() { 
@@ -129,6 +129,12 @@ public class FoodItem : MonoBehaviour {
             Invoke("becomePickUppable", .5f);
         }
 
+    }
+
+    //used to initialize a food to a random type
+    public void SetRandom()
+    {
+        SetFoodType((FoodTypes)Random.Range(0, System.Enum.GetValues(typeof(FoodItem.FoodTypes)).Length));
     }
 
     //for when food lands on the floor - start the 5 second rule countdown

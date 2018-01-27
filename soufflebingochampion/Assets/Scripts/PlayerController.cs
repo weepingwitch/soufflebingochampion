@@ -43,8 +43,7 @@ public class PlayerController : MonoBehaviour {
         gc = GameController.instance;
         im = InputManager.instance;
 
-        //debug testing
-        holdingFood = true;
+       
 
         if (playerNum == 0)
         {
@@ -53,10 +52,10 @@ public class PlayerController : MonoBehaviour {
         else
         {
             gameObject.layer = 9;
-            heldFood = FoodItem.FoodTypes.eggs;
+           
         }
 
-        heldItemImg.sprite = gc.foodSprites[(int)heldFood];
+      
 
     }
 	
