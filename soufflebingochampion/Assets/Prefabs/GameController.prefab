@@ -112,6 +112,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
   - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
   - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
   decayedFoodSprites: []
 --- !u!114 &114227111503611842
 MonoBehaviour:
