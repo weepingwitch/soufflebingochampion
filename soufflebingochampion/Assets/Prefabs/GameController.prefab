@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprites:
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: 84e8b005b8164a14fadde2da27af09ba, type: 3}
   - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
   - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
   - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BingoBoard : MonoBehaviour {
-
+    [SerializeField]
     private int myid;
 
     private BitArray myboard;
@@ -11,6 +11,9 @@ public class BingoBoard : MonoBehaviour {
 
 
     private FoodItem.FoodTypes[] goalboard;
+
+    [SerializeField]
+    private BingoSquare[] squares;
 
     private GameController gc;
 
@@ -30,8 +33,7 @@ public class BingoBoard : MonoBehaviour {
         GenerateSolutions();
 
 
-        //generate your card
-        GenerateRandomBoard();
+        
 
     }
 
@@ -40,15 +42,18 @@ public class BingoBoard : MonoBehaviour {
     void Start () {
         gc = GameController.instance;
 
+        //generate your card
+        GenerateRandomBoard();
+
         //DebugCheckBoard();
 
 
-       
+
 
 
         //DebugPrintGoal();
 
-        //AddItem(FoodItem.FoodTypes.eggs);
+        //AddItem(FoodItem.FoodTypes.a);
         //DebugPrintBoard(myboard);
 
         
@@ -71,6 +76,7 @@ public class BingoBoard : MonoBehaviour {
             if (newitem == goalboard[i])
             {
                 myboard.Set(i, true);
+                squares[i].markFilled();
             }
         }
 
@@ -94,6 +100,7 @@ public class BingoBoard : MonoBehaviour {
         {
             //will need to change this logic once we have more foods
             goalboard[i] = randomlist[i];
+            squares[i].setfood(randomlist[i]);
         }
     }
 
@@ -262,7 +269,7 @@ public class BingoBoard : MonoBehaviour {
 
     private void Shuffle<T>( IList<T> list)
     {
-        System.Random rng = new System.Random();
+        System.Random rng = new System.Random((int)Time.time*100 + Random.Range(0,9999));
         int n = list.Count;
         while (n > 1)
         {
