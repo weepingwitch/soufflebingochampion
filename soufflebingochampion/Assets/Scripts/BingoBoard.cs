@@ -17,16 +17,20 @@ public class BingoBoard : MonoBehaviour {
 
         myboard = new BitArray(25);
         solutions = new BitArray[12];
+
+        GenerateSolutions();
        
     }
 
 
     // Use this for initialization
     void Start () {
-        //DebugPrintBoard();
-        //Debug.Log(ConvertBitArray(myboard));
+
 
         DebugCheckBoard();
+
+
+        
 	}
 
    
@@ -42,6 +46,8 @@ public class BingoBoard : MonoBehaviour {
 
         //do something here to add it to the board lol
 
+
+        //check if there is a bingo
         if (CheckForBingo())
         {
             DoWin();
@@ -73,56 +79,10 @@ public class BingoBoard : MonoBehaviour {
 
     }
 
-    //output board value
-    private void DebugPrintBoard()
-    {
-#if UNITY_EDITOR
-        string boardstr = "";
-        foreach (bool bit in myboard)
-        {
-            if (bit)
-            {
-                boardstr += "1";
-            }
-            else
-            {
-                boardstr += "0";
-            }
-        }
-
-        Debug.Log(boardstr);
-        #endif
-    }
-
-
-    //check bingochecker
-    private void DebugCheckBoard()
-    {
-#if UNITY_EDITOR
-        myboard.Set(3, true);
-        myboard.Set(8, true);
-
-
-        solutions[0] = new BitArray(25);
-        solutions[0].Set(2, true);
-
-        solutions[1] = new BitArray(25);
-        solutions[1].Set(8, true);
-
-        
-        Debug.Log("test 0 - should be true: " + CheckForBingo());
-        myboard.Set(8, false);
-        Debug.Log("test 1 - should be false: " + CheckForBingo());
-
-#endif
-    }
-
-
 
 
 
     //called upon updating board, to check for a bingo
-    //still working on this, not sure if it will work yet lol
     private bool CheckForBingo()
     {
         int cursolution = 0;
@@ -136,11 +96,51 @@ public class BingoBoard : MonoBehaviour {
 
             cursolution = ConvertBitArray(solutions[i]);
             if (cursolution == (mycardint & cursolution))
+            {
+                //DebugPrintBoard(myboard);
+                //DebugPrintBoard(solutions[i]);
+               // DebugPrintBoard(ConvertBitArray(new BitArray((mycardint & cursolution)));
+                
                 return true;
+                
+            }
+                
         }
         return false;
     }
 
+
+
+    // generate array of possible solutions
+    private void GenerateSolutions()
+    {
+        solutions[0] = MakeBitArray(new int[] { 1,1,1,1,1 , 0,0,0,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
+        solutions[1] = MakeBitArray(new int[] { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  });
+        solutions[2] = MakeBitArray(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
+
+        //and so on, will finish this soon
+    }
+
+
+    private BitArray MakeBitArray(int[] myints)
+    {
+        BitArray res = new BitArray(25);
+
+
+        for (int i = 0; i < myints.Length; i++)
+        {
+            if (myints[i] == 1)
+            {
+                res.Set(i, true);
+            }
+            else
+            {
+                res.Set(i, false);
+            }
+        }
+
+        return res;
+    }
 
 
     //convert bitarray to int
@@ -155,5 +155,43 @@ public class BingoBoard : MonoBehaviour {
         mybits.CopyTo(result, 0);
         return result[0];
     }
+
+
+    //output board value
+    private void DebugPrintBoard(BitArray mybits)
+    {
+#if UNITY_EDITOR
+        string boardstr = "";
+        foreach (bool bit in mybits)
+        {
+            if (bit)
+            {
+                boardstr += "1";
+            }
+            else
+            {
+                boardstr += "0";
+            }
+        }
+
+        Debug.Log(boardstr);
+#endif
+    }
+
+
+    //check bingochecker
+    private void DebugCheckBoard()
+    {
+#if UNITY_EDITOR
+
+        myboard = MakeBitArray(new int[] { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
+        
+        Debug.Log("test 0 - should be false: " + CheckForBingo());
+        myboard = MakeBitArray(new int[] { 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
+        Debug.Log("test 1 - should be true: " + CheckForBingo());
+
+#endif
+    }
+
 
 }
