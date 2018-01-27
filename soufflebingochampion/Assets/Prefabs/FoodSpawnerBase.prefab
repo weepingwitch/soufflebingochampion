@@ -50,8 +50,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355779401888912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalPosition: {x: -6.5, y: -0.5, z: 0}
+  m_LocalScale: {x: 14, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4694108534830486}
   m_RootOrder: 0
@@ -63,7 +63,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052300467971686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 1, z: -0.06507001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4119127824993138}
@@ -84,7 +84,7 @@ MonoBehaviour:
   foodBase: {fileID: 1813284550702038, guid: f61ecf6d1c87c1847baa0d004f83aa5d, type: 2}
   conveyerSpotBase: {fileID: 1313651409417620, guid: 02b39371c19578c4eb25b76326204943,
     type: 2}
-  moveDirect: {x: 0, y: -1, z: 0}
+  moveDirect: {x: -1, y: 0, z: 0}
 --- !u!212 &212291707829379848
 SpriteRenderer:
   m_ObjectHideFlags: 1
