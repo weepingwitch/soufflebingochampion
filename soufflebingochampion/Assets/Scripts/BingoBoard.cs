@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BingoBoard : MonoBehaviour {
-    [SerializeField]
-    private int myid;
+
+    private GameController gc;
+    private BingoSquare[] squares;
 
     private BitArray myBoard;
     private BitArray[] solutions;
 
-
     private FoodItem.FoodTypes[] goalboard;
 
     [SerializeField]
-    private BingoSquare[] squares;
+    private int myid;
 
-    private GameController gc;
-
-
-
+    [SerializeField]
+    private BingoSquare squareBase;
 
     //called before Start
     private void Awake()
@@ -27,13 +25,10 @@ public class BingoBoard : MonoBehaviour {
         myBoard = new BitArray(25);
         solutions = new BitArray[12];
         goalboard = new FoodItem.FoodTypes[25];
-
+        squares = new BingoSquare[25];
 
         //generate the array of bingo solutions
         GenerateSolutions();
-
-
-        
 
     }
 
@@ -47,22 +42,17 @@ public class BingoBoard : MonoBehaviour {
 
         //DebugCheckBoard();
 
-
-
-
-
         //DebugPrintGoal();
 
         //AddItem(FoodItem.FoodTypes.a);
         //DebugPrintBoard(myboard);
 
-        
 	}
 
-   
+
     // Update is called once per frame
     void Update () {
-		
+
 	}
 
 
@@ -100,6 +90,8 @@ public class BingoBoard : MonoBehaviour {
         {
             //will need to change this logic once we have more foods
             goalboard[i] = randomlist[i];
+            squares[i] = Instantiate(squareBase);
+            squares[i].transform.localPosition = new Vector3(i/5, i%5, 0);
             squares[i].setfood(randomlist[i]);
         }
     }
@@ -110,7 +102,7 @@ public class BingoBoard : MonoBehaviour {
         myid = newplayernum;
     }
 
-    //return which player this belongs to 
+    //return which player this belongs to
     public int GetPlayerNumber()
     {
         return myid;
@@ -148,11 +140,11 @@ public class BingoBoard : MonoBehaviour {
                 //DebugPrintBoard(myboard);
                 //DebugPrintBoard(solutions[i]);
                // DebugPrintBoard(ConvertBitArray(new BitArray((mycardint & cursolution)));
-                
+
                 return true;
-                
+
             }
-                
+
         }
         return false;
     }
@@ -258,7 +250,7 @@ public class BingoBoard : MonoBehaviour {
 #if UNITY_EDITOR
 
         myBoard = MakeBitArray(new int[] { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
-        
+
         Debug.Log("test 0 - should be false: " + CheckForBingo());
         myBoard = MakeBitArray(new int[] { 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
         Debug.Log("test 1 - should be true: " + CheckForBingo());

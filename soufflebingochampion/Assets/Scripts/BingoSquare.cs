@@ -4,36 +4,41 @@ using UnityEngine;
 
 public class BingoSquare : MonoBehaviour {
 
-
     static GameController gc;
+    private GameObject foodObject;
+    private SpriteRenderer foodSpriteRenderer;
+    private SpriteRenderer check;
 
     [SerializeField]
-    private SpriteRenderer bg, fooditem, check;
+    private SpriteRenderer checkPrefab;
 
 	// Use this for initialization
 	void Start () {
-        
+        check = Instantiate(checkPrefab);
+        check.transform.localPosition = transform.localPosition;
         check.enabled = false;
 	}
 
     //set the sprite based on what food is in this spot
     public void setfood(FoodItem.FoodTypes newfood)
     {
-      
         if (gc == null)
         {
             gc = GameController.instance;
         }
 
-        fooditem.sprite = gc.foodSprites[(int)newfood];
-        
+        foodObject = new GameObject("foodItem");
+        foodObject.transform.localPosition = transform.localPosition;
+        foodSpriteRenderer = foodObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
+        foodSpriteRenderer.sortingOrder = 5;
+        foodSpriteRenderer.sprite = gc.foodSprites[(int)newfood];
+
     }
 
 
     //mark the spot as filled
     public void markFilled()
     {
-
         check.enabled = true;
     }
 
