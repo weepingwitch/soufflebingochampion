@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 
     //should be 0 or 1
-    public int playernum;
+    public int playerNum;
 
 
     
@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D rb2d;
     [SerializeField]
-    private SpriteRenderer pimg, aimindicator;
+    private SpriteRenderer pimg, aimIndicator;
     [SerializeField]
-    private GameObject foodbase;
+    private GameObject foodBase;
 
 
     private Vector2 aim = Vector2.right;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     private bool holdingfood = false;
 
 
-    private FoodItem.FoodTypes heldFood = FoodItem.FoodTypes.a ;
+    private FoodItem.FoodTypes heldFood = FoodItem.FoodTypes.cheese ;
 
 	// Use this for initialization
 	void Start () {
@@ -51,11 +51,11 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
         //handle movement
-        Vector2 movevect = im.getPlayerMove(playernum);
+        Vector2 movevect = im.getPlayerMove(playerNum);
         rb2d.velocity = movevect * movespeed;
         
         //handle aiming and sprite direction
-        Vector2 aimdirect = im.getPlayerAim(playernum);
+        Vector2 aimdirect = im.getPlayerAim(playerNum);
         if (Mathf.Abs(aimdirect.magnitude) > .1f)
         {
             aim = aimdirect.normalized;
@@ -70,17 +70,17 @@ public class PlayerController : MonoBehaviour {
         }
 
         //handle aim indicator
-        aimindicator.transform.localPosition = aim;
-        aimindicator.transform.up = aim;
+        aimIndicator.transform.localPosition = aim;
+        aimIndicator.transform.up = aim;
 
 
         //handle throwing
         if (readytothrow)
         {
            
-            if (im.getPlayerShoot(playernum) && holdingfood)
+            if (im.getPlayerShoot(playerNum) && holdingfood)
             {
-                Debug.Log(playernum + " threw a " + heldFood);
+                Debug.Log(playerNum + " threw a " + heldFood);
                 readytothrow = false;
                 throwcountdown = throwtime;
                 doThrow(aim);
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour {
 
     public void doThrow(Vector2 throwdirect)
     {
-        var thrown = Instantiate(foodbase);
+        var thrown = Instantiate(foodBase);
         thrown.transform.position = transform.position;
         var foodc = thrown.GetComponent<FoodItem>();
         foodc.SetFoodType(heldFood);
