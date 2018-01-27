@@ -21,12 +21,16 @@ public class PlayerController : MonoBehaviour {
 
 
     private Vector2 aim = Vector2.right;
+    private Vector2 slideDirection;
 
     private float moveSpeed = 4f;
     private float throwStrength = 3f;
 
     private float throwCountdown;
     private float throwTime = .25f;
+
+
+    private float slideCountdown;
 
     private Vector3 dropOffset;
 
@@ -69,11 +73,23 @@ public class PlayerController : MonoBehaviour {
         Vector2 movevect = im.getPlayerMove(playerNum);
         rb2d.velocity = movevect * moveSpeed;
 
+        if (Mathf.Abs(movevect.magnitude) > .15f)
+        {
+            slideDirection = movevect.normalized * moveSpeed;
+        }
+
         //handle being pushed
         if (pushcount > 0)
         {
             pushcount -= Time.deltaTime;
             rb2d.velocity += pushDirect;
+        }
+
+
+        if (slideCountdown > 0)
+        {
+            slideCountdown -= Time.deltaTime;
+            rb2d.velocity += slideDirection;
         }
         
         //handle aiming and sprite direction
@@ -154,6 +170,7 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("fooditem"))
         {
             var theFood = collision.gameObject.GetComponent<FoodItem>();
+            //if it is still an active food
             if (theFood != null)
             {
                 if (!theFood.isbeingthrown)
@@ -168,6 +185,12 @@ public class PlayerController : MonoBehaviour {
                 }
            
             }
+        }
+        if (collision.gameObject.CompareTag("slippery"))
+        {
+            //Debug.Log("slipping!");
+
+            slideCountdown = .05f;
         }
     }
 

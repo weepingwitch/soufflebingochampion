@@ -152,6 +152,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114135809067218840, guid: 547698cb0d574a045945fd5c5992f502,
+        type: 2}
+      propertyPath: foodSprites.Array.data[12]
+      value: 
+      objectReference: {fileID: 21300000, guid: d1014eef3e1c44b4bb417e8baee014db,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 547698cb0d574a045945fd5c5992f502, type: 2}
   m_IsPrefabParent: 0

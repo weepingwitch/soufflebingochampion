@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodItem : MonoBehaviour {
 
 
-    public enum FoodTypes { eggs, butter, cheese, milk, chocolate, flour, nutmeg, paprika, pepper, salt, vanilla, cream, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z  }
+    public enum FoodTypes { eggs, butter, cheese, milk, chocolate, flour, nutmeg, paprika, pepper, salt, vanilla, cream, sugar, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z  }
 
     
 
@@ -175,7 +175,8 @@ public class FoodItem : MonoBehaviour {
     {
 
         gameObject.tag = "slippery";
-        
+        foodSR.color = new Color(DecayColor.r, DecayColor.g, DecayColor.b, .5f);
+        gameObject.layer = 10;
 
         //remove this script so it doesn't update anymore and just stays as a sprite renderer
         Destroy(this);
