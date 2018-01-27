@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b81dc145defc5446b82515796ad18ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodSR: {fileID: 212443566749216498}
 --- !u!212 &212443566749216498
 SpriteRenderer:
   m_ObjectHideFlags: 1
