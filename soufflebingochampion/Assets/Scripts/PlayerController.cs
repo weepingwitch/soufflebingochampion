@@ -22,17 +22,17 @@ public class PlayerController : MonoBehaviour {
 
     private Vector2 aim = Vector2.right;
 
-    private float movespeed = 4f;
-    private float throwstrength = 3f;
+    private float moveSpeed = 4f;
+    private float throwStrength = 3f;
 
-    private float throwcountdown;
-    private float throwtime = .25f;
+    private float throwCountdown;
+    private float throwTime = .25f;
 
-    
+   
 
-    private bool readytothrow = true;
+    private bool readyToThrow = true;
 
-    private bool holdingfood = false;
+    private bool holdingFood = false;
 
 
     private FoodItem.FoodTypes heldFood = FoodItem.FoodTypes.cheese ;
@@ -43,7 +43,17 @@ public class PlayerController : MonoBehaviour {
         im = InputManager.instance;
 
         //debug testing
-        holdingfood = true;
+        holdingFood = true;
+
+        if (playerNum == 0)
+        {
+            gameObject.layer = 8;
+        }
+        else
+        {
+            gameObject.layer = 9;
+            heldFood = FoodItem.FoodTypes.eggs;
+        }
 
 	}
 	
@@ -52,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 
         //handle movement
         Vector2 movevect = im.getPlayerMove(playerNum);
-        rb2d.velocity = movevect * movespeed;
+        rb2d.velocity = movevect * moveSpeed;
         
         //handle aiming and sprite direction
         Vector2 aimdirect = im.getPlayerAim(playerNum);
@@ -75,23 +85,23 @@ public class PlayerController : MonoBehaviour {
 
 
         //handle throwing
-        if (readytothrow)
+        if (readyToThrow)
         {
            
-            if (im.getPlayerShoot(playerNum) && holdingfood)
+            if (im.getPlayerShoot(playerNum) && holdingFood)
             {
-                Debug.Log(playerNum + " threw a " + heldFood);
-                readytothrow = false;
-                throwcountdown = throwtime;
+                //Debug.Log(playerNum + " threw a " + heldFood);
+                readyToThrow = false;
+                throwCountdown = throwTime;
                 doThrow(aim);
             }
         }
         else
         {
-            throwcountdown -= Time.deltaTime;
-            if (throwcountdown <= 0)
+            throwCountdown -= Time.deltaTime;
+            if (throwCountdown <= 0)
             {
-                readytothrow = true;
+                readyToThrow = true;
             }
         }
 
@@ -112,16 +122,18 @@ public class PlayerController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("fooditem"))
         {
-            var thefood = collision.gameObject.GetComponent<FoodItem>();
-            if (thefood != null)
+            var theFood = collision.gameObject.GetComponent<FoodItem>();
+            if (theFood != null)
             {
-                if (!thefood.isbeingthrown)
+                if (!theFood.isbeingthrown)
                 {
-                    pickupFood(thefood);
+                    pickupFood(theFood);
                 }
                 else
                 {
-                    dostun(thefood);
+
+                    Vector3 stunDirect = transform.position - collision.gameObject.transform.position;
+                    dostun(theFood, stunDirect);
                 }
            
             }
@@ -129,28 +141,59 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    private void dostun(FoodItem hitfood)
+    private void dostun(FoodItem hitfood, Vector3 stunDirect)
     {
 
+        if (holdingFood)
+        {
+            doThrow(Vector2.zero, true);
+        }
+
+
+        Destroy(hitfood.gameObject);
+
+        rb2d.AddForce(stunDirect * 500f);
     }
 
 
     private void pickupFood(FoodItem newfood)
     {
 
+        if (holdingFood)
+        {
 
+        }
+        else
+        {
+            holdingFood = true;
+            heldFood = newfood.GetFoodType();
+            Destroy(newfood.gameObject);
+        }
 
     }
 
 
-    private void doThrow(Vector2 throwdirect)
+    private void doThrow(Vector2 throwdirect, bool isdropped = false)
     {
         var thrown = Instantiate(foodBase);
         thrown.transform.position = transform.position;
+        if (playerNum == 0)
+        {
+            thrown.layer = 8;
+        }
+        else
+        {
+            thrown.layer = 9;
+        }
         var foodc = thrown.GetComponent<FoodItem>();
         foodc.SetFoodType(heldFood);
+        if (!isdropped)
+        {
+            foodc.throwfood(throwdirect * throwStrength);
+        }
        
-        foodc.throwfood(throwdirect*throwstrength);
+
+        holdingFood = false;
     }
 
 

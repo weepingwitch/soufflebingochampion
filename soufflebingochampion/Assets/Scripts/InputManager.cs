@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour {
     public static InputManager instance;
 
     public bool isOsx = false;
-    public bool usekeys = false;
+    public bool useKeys = false;
 
 
     //set the static instance, make sure there is only one
@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour {
 
         if (Input.GetJoystickNames().Length < 2)
         {
-            usekeys = true;
+            useKeys = true;
         }
     }
 
@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour {
         }
         else
         {
-            if (usekeys)
+            if (useKeys)
             {
                 return new Vector2(Input.GetAxisRaw("P2MoveHorizontalKeys"), Input.GetAxisRaw("P2MoveVerticalKeys"));
             }
@@ -62,7 +62,7 @@ public class InputManager : MonoBehaviour {
         }
         else
         {
-            if (usekeys)
+            if (useKeys)
                 return (Input.GetButton("P2FireKeys"));
             if (isOsx)
                 return (Input.GetAxisRaw("P2FireMac") > .1f);
@@ -84,7 +84,7 @@ public class InputManager : MonoBehaviour {
         }
         else
         {
-            if (usekeys)
+            if (useKeys)
             {
                 return new Vector2(Input.GetAxisRaw("P2AimHorizontalKeys"), Input.GetAxisRaw("P2AimVerticalKeys"));
             }

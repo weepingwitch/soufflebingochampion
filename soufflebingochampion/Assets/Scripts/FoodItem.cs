@@ -123,6 +123,7 @@ public class FoodItem : MonoBehaviour {
             gc = GameController.instance;
         current_food = newtype;
         foodSR.sprite = gc.foodSprites[(int)newtype];
+        Invoke("becomePickUppable", 1f);
 
     }
 
@@ -131,6 +132,7 @@ public class FoodItem : MonoBehaviour {
     {
         if (!isDecaying)
         {
+           
             isDecaying = true;
             countdowntimer = decaytime;
 
@@ -150,11 +152,17 @@ public class FoodItem : MonoBehaviour {
         return Mathf.Clamp01((decaytime - countdowntimer) / decaytime);
     }
 
+    private void becomePickUppable()
+    {
+        gameObject.layer = 10;
+    }
+
     //do something here when the food goes bad?!
     private void GoBad()
     {
 
         gameObject.tag = "slippery";
+        
 
         //remove this script so it doesn't update anymore and just stays as a sprite renderer
         Destroy(this);

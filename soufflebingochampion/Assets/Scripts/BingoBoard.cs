@@ -6,7 +6,7 @@ public class BingoBoard : MonoBehaviour {
     [SerializeField]
     private int myid;
 
-    private BitArray myboard;
+    private BitArray myBoard;
     private BitArray[] solutions;
 
 
@@ -24,7 +24,7 @@ public class BingoBoard : MonoBehaviour {
     private void Awake()
     {
         //initialize the values
-        myboard = new BitArray(25);
+        myBoard = new BitArray(25);
         solutions = new BitArray[12];
         goalboard = new FoodItem.FoodTypes[25];
 
@@ -75,7 +75,7 @@ public class BingoBoard : MonoBehaviour {
         {
             if (newitem == goalboard[i])
             {
-                myboard.Set(i, true);
+                myBoard.Set(i, true);
                 squares[i].markFilled();
             }
         }
@@ -136,7 +136,7 @@ public class BingoBoard : MonoBehaviour {
         int cursolution = 0;
 
 
-        int mycardint = ConvertBitArray(myboard);
+        int mycardint = ConvertBitArray(myBoard);
 
 
         for (int i = 0; i < solutions.Length; i++)
@@ -257,10 +257,10 @@ public class BingoBoard : MonoBehaviour {
     {
 #if UNITY_EDITOR
 
-        myboard = MakeBitArray(new int[] { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
+        myBoard = MakeBitArray(new int[] { 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
         
         Debug.Log("test 0 - should be false: " + CheckForBingo());
-        myboard = MakeBitArray(new int[] { 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
+        myBoard = MakeBitArray(new int[] { 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, });
         Debug.Log("test 1 - should be true: " + CheckForBingo());
 
 #endif
