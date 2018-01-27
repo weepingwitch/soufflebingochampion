@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodItem : MonoBehaviour {
 
 
-    public enum FoodTypes { eggs, butter, cheese, milk, seasoning, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z  }
+    public enum FoodTypes { eggs, butter, cheese, milk, chocolate, flour, nutmeg, paprika, pepper, salt, vanilla, cream, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z  }
 
     
 
@@ -30,12 +30,14 @@ public class FoodItem : MonoBehaviour {
     private float throwtime;
     private float throwtimer;
     private Vector2 origvel;
-    
+
+
+    public int owner;
 
     private GameController gc;
 
 
-    public bool isbeingthrown = true;
+    public bool isbeingthrown = false;
 
 	// Use this for initialization
 	void Start() { 
@@ -117,14 +119,24 @@ public class FoodItem : MonoBehaviour {
     }
 
     //set what type of food the item is
-    public void SetFoodType(FoodTypes newtype)
+    public void SetFoodType(FoodTypes newtype, bool dropped = false)
     {
         if (gc == null)
             gc = GameController.instance;
         current_food = newtype;
         foodSR.sprite = gc.foodSprites[(int)newtype];
-        Invoke("becomePickUppable", 1f);
+        
+        if (dropped)
+        {
+            Invoke("becomePickUppable", .5f);
+        }
 
+    }
+
+    //used to initialize a food to a random type
+    public void SetRandom()
+    {
+        SetFoodType((FoodTypes)Random.Range(0, System.Enum.GetValues(typeof(FoodItem.FoodTypes)).Length));
     }
 
     //for when food lands on the floor - start the 5 second rule countdown
@@ -132,6 +144,7 @@ public class FoodItem : MonoBehaviour {
     {
         if (!isDecaying)
         {
+            becomePickUppable();
            
             isDecaying = true;
             countdowntimer = decaytime;

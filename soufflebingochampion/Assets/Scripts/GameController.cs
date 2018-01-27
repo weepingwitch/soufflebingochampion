@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -9,6 +10,10 @@ public class GameController : MonoBehaviour {
     public Sprite[] decayedFoodSprites;
 
     public static GameController instance;
+
+
+    [SerializeField]
+    private GameObject resultsScreen;
 
     private InputManager im;
 
@@ -30,6 +35,13 @@ public class GameController : MonoBehaviour {
         im = InputManager.instance;
 		
 	}
+
+    //called from the bingo board when someone has won!!!
+    public void PlayerWon(int playerNum)
+    {
+        resultsScreen.SetActive(true);
+        resultsScreen.GetComponentInChildren<Text>().text = "Player " + (playerNum + 1) + " won!!";
+    }
 	
 	// Update is called once per frame
 	void Update () {
