@@ -117,13 +117,17 @@ public class FoodItem : MonoBehaviour {
     }
 
     //set what type of food the item is
-    public void SetFoodType(FoodTypes newtype)
+    public void SetFoodType(FoodTypes newtype, bool dropped = false)
     {
         if (gc == null)
             gc = GameController.instance;
         current_food = newtype;
         foodSR.sprite = gc.foodSprites[(int)newtype];
-        Invoke("becomePickUppable", 1f);
+        
+        if (dropped)
+        {
+            Invoke("becomePickUppable", .5f);
+        }
 
     }
 
@@ -132,6 +136,7 @@ public class FoodItem : MonoBehaviour {
     {
         if (!isDecaying)
         {
+            becomePickUppable();
            
             isDecaying = true;
             countdowntimer = decaytime;
