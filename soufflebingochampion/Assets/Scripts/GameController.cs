@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour {
 
     public static GameController instance;
 
+    private InputManager im;
+
     //set the static instance, make sure there is only one
     private void Awake()
     {
@@ -19,17 +21,18 @@ public class GameController : MonoBehaviour {
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
     // Use this for initialization
     void Start () {
+        im = InputManager.instance;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //Debug.Log(im.getPlayerMove(0));
 	}
 }

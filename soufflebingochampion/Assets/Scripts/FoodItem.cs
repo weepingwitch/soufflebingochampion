@@ -152,10 +152,12 @@ public class FoodItem : MonoBehaviour {
     private void GoBad()
     {
 
+        gameObject.tag = "slippery";
+
         //remove this script so it doesn't update anymore and just stays as a sprite renderer
         Destroy(this);
 
-        //remove any colliders or whatever here too 
+       
     }
 
 
