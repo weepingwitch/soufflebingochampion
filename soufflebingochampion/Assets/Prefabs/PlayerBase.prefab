@@ -152,7 +152,9 @@ MonoBehaviour:
   rb2d: {fileID: 50104394160219824}
   pimg: {fileID: 212297551325960864}
   aimindicator: {fileID: 212414205096024998}
+  foodbase: {fileID: 1813284550702038, guid: f61ecf6d1c87c1847baa0d004f83aa5d, type: 2}
   movespeed: 3
+  throwstrength: 3
 --- !u!212 &212297551325960864
 SpriteRenderer:
   m_ObjectHideFlags: 1

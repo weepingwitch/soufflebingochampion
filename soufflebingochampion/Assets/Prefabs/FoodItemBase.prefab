@@ -67,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 1075888858791224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4277577833483142}
   m_RootOrder: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodSR: {fileID: 212443566749216498}
   DecayColor: {r: 0.5514706, g: 0.2852434, b: 0, a: 1}
+  rb2d: {fileID: 50006860808458824}
 --- !u!212 &212443566749216498
 SpriteRenderer:
   m_ObjectHideFlags: 1

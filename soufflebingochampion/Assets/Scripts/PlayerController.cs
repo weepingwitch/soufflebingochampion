@@ -16,16 +16,35 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
     [SerializeField]
     private SpriteRenderer pimg, aimindicator;
+    [SerializeField]
+    private GameObject foodbase;
 
 
     private Vector2 aim = Vector2.right;
 
     public float movespeed = 4f;
+    public float throwstrength = 3f;
+
+    private float throwcountdown;
+    private float throwtime = .25f;
+
+    
+
+    private bool readytothrow = true;
+
+    private bool holdingfood = false;
+
+
+    private FoodItem.FoodTypes heldFood = FoodItem.FoodTypes.a ;
 
 	// Use this for initialization
 	void Start () {
         gc = GameController.instance;
         im = InputManager.instance;
+
+        //debug testing
+        holdingfood = true;
+
 	}
 	
 	// Update is called once per frame
@@ -55,11 +74,39 @@ public class PlayerController : MonoBehaviour {
         aimindicator.transform.up = aim;
 
 
-
-
+        //handle throwing
+        if (readytothrow)
+        {
+           
+            if (im.getPlayerShoot(playernum) && holdingfood)
+            {
+                Debug.Log(playernum + " threw a " + heldFood);
+                readytothrow = false;
+                throwcountdown = throwtime;
+                doThrow(aim);
+            }
+        }
+        else
+        {
+            throwcountdown -= Time.deltaTime;
+            if (throwcountdown <= 0)
+            {
+                readytothrow = true;
+            }
+        }
 
 	}
 
+
+    public void doThrow(Vector2 throwdirect)
+    {
+        var thrown = Instantiate(foodbase);
+        thrown.transform.position = transform.position;
+        var foodc = thrown.GetComponent<FoodItem>();
+        foodc.SetFoodType(heldFood);
+       
+        foodc.throwfood(throwdirect*throwstrength);
+    }
 
 
 

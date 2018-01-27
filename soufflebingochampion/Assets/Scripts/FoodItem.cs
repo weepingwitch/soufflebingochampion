@@ -42,19 +42,19 @@ public class FoodItem : MonoBehaviour {
          gc = GameController.instance;
         //SetFoodType(FoodTypes.milk);
 
-        throwfood(Vector2.left*2f);
+        //throwfood(Vector2.left*2f);
         
  
 
 	}
 
     //call this to throw the food
-    public void throwfood(Vector2 direct)
+    public void throwfood(Vector2 direct, float duration = 2f)
     {
 
         rb2d.velocity = direct;
         origvel = direct;
-        throwtime = direct.magnitude;
+        throwtime = duration;
         throwtimer = throwtime;
         isbeingthrown = true;
         
@@ -119,6 +119,8 @@ public class FoodItem : MonoBehaviour {
     //set what type of food the item is
     public void SetFoodType(FoodTypes newtype)
     {
+        if (gc == null)
+            gc = GameController.instance;
         current_food = newtype;
         foodSR.sprite = gc.foodSprites[(int)newtype];
 
