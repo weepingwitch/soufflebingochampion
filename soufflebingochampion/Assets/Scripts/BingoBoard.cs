@@ -7,8 +7,12 @@ public class BingoBoard : MonoBehaviour {
     private int myid;
 
     private BitArray myboard;
-
     private BitArray[] solutions;
+
+
+    private FoodItem.FoodTypes[] goalboard;
+
+    
 
 
     //called before Start
@@ -17,6 +21,7 @@ public class BingoBoard : MonoBehaviour {
 
         myboard = new BitArray(25);
         solutions = new BitArray[12];
+        goalboard = new FoodItem.FoodTypes[25];
 
         GenerateSolutions();
        
@@ -27,8 +32,12 @@ public class BingoBoard : MonoBehaviour {
     void Start () {
 
 
-        DebugCheckBoard();
+        //DebugCheckBoard();
 
+
+        GenerateRandomBoard();
+        DebugPrintGoal();
+        
 
         
 	}
@@ -44,8 +53,14 @@ public class BingoBoard : MonoBehaviour {
     public void AddItem(FoodItem.FoodTypes newitem)
     {
 
-        //do something here to add it to the board lol
-
+        //compare new food to goal board, mark spot as completed if match
+        for (int i = 0; i < goalboard.Length; i++)
+        {
+            if (newitem == goalboard[i])
+            {
+                myboard.Set(i, true);
+            }
+        }
 
         //check if there is a bingo
         if (CheckForBingo())
@@ -53,7 +68,21 @@ public class BingoBoard : MonoBehaviour {
             DoWin();
         }
 
+    }
 
+    //Fill the board with random foods !!
+    private void GenerateRandomBoard()
+    {
+
+        var randomlist =  new List<FoodItem.FoodTypes>((FoodItem.FoodTypes[])System.Enum.GetValues(typeof(FoodItem.FoodTypes)));
+        Shuffle(randomlist);
+
+
+        for (int i = 0; i < goalboard.Length; i++)
+        {
+            //will need to change this logic once we have more foods
+            goalboard[i] = randomlist[i];
+        }
     }
 
     //set this as belonging to player 1 or 2 or whatever
@@ -193,6 +222,16 @@ public class BingoBoard : MonoBehaviour {
 #endif
     }
 
+    private void DebugPrintGoal()
+    {
+#if UNITY_EDITOR
+        foreach (FoodItem.FoodTypes i in goalboard)
+        {
+            Debug.Log(i.ToString());
+        }
+#endif
+    }
+
 
     //check bingochecker
     private void DebugCheckBoard()
@@ -208,5 +247,19 @@ public class BingoBoard : MonoBehaviour {
 #endif
     }
 
+
+    private void Shuffle<T>( IList<T> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
 
 }
