@@ -31,6 +31,7 @@ public class BingoSquare : MonoBehaviour {
         foodObject.transform.localPosition = new Vector3(0, 0, 0);
         foodObject.transform.localScale = new Vector3(1, 1, 1);
         foodSpriteRenderer = foodObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
+        foodSpriteRenderer.sortingLayerName = "UI";
         foodSpriteRenderer.sortingOrder = 5;
         foodSpriteRenderer.sprite = gc.foodSprites[(int)newfood];
 

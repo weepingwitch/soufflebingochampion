@@ -43,3 +43,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BACKGROUNDFLOOR
+    uniqueID: 1298631719
+    locked: 0
+  - name: STOVE
+    uniqueID: 3013159867
+    locked: 0
+  - name: FOODITEM
+    uniqueID: 3847403369
+    locked: 0
+  - name: PLAYER
+    uniqueID: 3577685253
+    locked: 0
+  - name: AIMINDICATOR
+    uniqueID: 3419775379
+    locked: 0
+  - name: EFFECTS
+    uniqueID: 2677985915
+    locked: 0
+  - name: UI
+    uniqueID: 648514593
+    locked: 0
