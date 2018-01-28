@@ -24,6 +24,7 @@ public class MusicManager : MonoBehaviour {
 						  //source[0, 1]  -> Title
 						  //source [2, 3, 4, 5, 6] -> Main MX
 						  //source[7,0] -> Victory
+
 	public float fadeOutTime = 1.5f; //time takes to fade out when calling FadeOutMusic()
 	public float fadeInTime = 0.2f;  //time takes to fade in when calling FadeInMusic()
 	public AudioMixerSnapshot fadeOut; //place FadeOut snapshot here
@@ -84,6 +85,8 @@ public class MusicManager : MonoBehaviour {
 		//if music already playing, fade out music and stop all music playing
 			//load title music, set second section to loop, and play
 		StopMusic();
+		source [0].enabled = true;
+		source [1].enabled = true;
 		LoadTitleMX ();
 		FadeInMusic ();
 		source [1].Play ();
@@ -118,12 +121,14 @@ public class MusicManager : MonoBehaviour {
 			playerId = player;
 			LoadVictoryMX ();
 			mainMXOut.TransitionTo (mainMXOutTime);
+			source [0].enabled = true;
 			source [7].Play ();
 			source [0].loop = true;
 			Invoke ("PlayVictoryMX", source [7].clip.length);
 		} else if (!source [2].isPlaying) {
 			playerId = player;
 			LoadVictoryMX ();
+			source [0].enabled = true;
 			source [7].Play ();
 			source [0].loop = true;
 			Invoke ("PlayVictoryMX", source [7].clip.length);
@@ -155,11 +160,19 @@ public class MusicManager : MonoBehaviour {
 		//if music already playing, fade out music and stop all music playing
 		//load Victory music, set second section to loop, and play
 		if (source [0].isPlaying || source [1].isPlaying) {
-			FadeOutMusic ();
+			//FadeOutMusic ();
+			source[0].enabled = false;
+			source [0].Stop ();
+			source [1].enabled = false;
+			source [1].Stop ();
 			Invoke ("LoadMainMX", fadeOutTime);
 			layer1Snap.TransitionTo (0.2f);
 			Invoke ("PlayMainMX",  fadeOutTime);
 		} else if (!source [0].isPlaying && !source [1].isPlaying) {
+			source[0].enabled = false;
+			source [0].Stop ();
+			source [1].enabled = false;
+			source [1].Stop ();
 			layer1Snap.TransitionTo (0.2f);
 			LoadMainMX ();
 			PlayMainMX ();

@@ -7,6 +7,8 @@ TagManager:
   - fooditem
   - slippery
   - donefood
+  - shards
+  - conveyerSpot
   layers:
   - Default
   - TransparentFX

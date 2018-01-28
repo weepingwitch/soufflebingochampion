@@ -33,6 +33,15 @@ public class FoodSpawner : MonoBehaviour {
         }
         moveDirect = new Vector3(movefactor, 0);
         beltImage.transform.localPosition = new Vector3(((conveyerLength / 2f)-.5f)*movefactor, 0, 0);
+        Vector3 spotPos = Vector3.zero;
+        for (int i = 0; i < conveyerLength; i++)
+        {
+            var conveySpot = Instantiate(conveyerSpotBase);
+            conveySpot.transform.position = transform.position + new Vector3(0, .5f, 0) + spotPos;
+            spotPos += Vector3.right * movefactor;
+            conveySpot.GetComponent<ConveyerSpot>().StartMoving(moveDirect, conveyerLength);
+
+        }
 
 
 	}

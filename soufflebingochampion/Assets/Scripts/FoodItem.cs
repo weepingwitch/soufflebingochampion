@@ -21,14 +21,18 @@ public class FoodItem : MonoBehaviour {
     private Rigidbody2D rb2d;
 
     [SerializeField]
-    private GameObject shardObj, splatObj;
+    private GameObject shardObj;
+
+
+    [SerializeField]
+    private Sprite foodSplat, liquidSplat;
 
     private bool isDecaying;
 
     private float countdowntimer;
     private float decaytime = 5f;
 
-
+    public Color splatColor = Color.white;
     private float throwtime;
     private float throwtimer;
     private Vector2 origvel;
@@ -155,6 +159,7 @@ public class FoodItem : MonoBehaviour {
                     isBeingThrown = false;
                     rb2d.velocity = Vector2.zero;
                     StartDecay();
+                    foodSR.sortingOrder = 0;
                 }
 
             }
@@ -177,7 +182,8 @@ public class FoodItem : MonoBehaviour {
             //check to see if it is fully decayed
             if (countdowntimer <= 0)
             {
-                GoBad();
+                doSplat(false,false);
+                
             }
 
         }
@@ -238,6 +244,10 @@ public class FoodItem : MonoBehaviour {
                 {
                     return;
                 }
+                if (collision.CompareTag("conveyerSpot") && !canBounce)
+                {
+                    return;
+                }
             }
             doBounce();
         }
@@ -285,67 +295,76 @@ public class FoodItem : MonoBehaviour {
         }
     }
 
-    public void doSplat(bool isChef = false)
+    public void doSplat(bool isChef = false, bool makeSound = true)
     {
         AudioClip splatSound;
         bool doShatter = false;
-      
 
+        foodSR.sortingOrder = 0;
         switch (current_food)
         {
             case FoodTypes.crab:
             case FoodTypes.eggs:
-                splatSound = null; //crab egg
+                splatSound = SoundManager.instance.eggCrabImpact; //crab egg
+                doShatter = true;
                 break;
             case FoodTypes.vinegar:
                 doShatter = true;
-                splatSound = null; // large glass
+                splatSound = SoundManager.instance.largeGlassImpact; // large glass
                 break;
             case FoodTypes.salt:
             case FoodTypes.pepper:
             case FoodTypes.paprika:
                 doShatter = true;
-                splatSound = null; //small glass
+                splatSound = SoundManager.instance.smallGlassImpact; //small glass
                 break;
             default:
-                splatSound = null; //implement here
+                splatSound = SoundManager.instance.FoodImpact(); //implement here
                 break;
         }
 
         //play the sound here - splatSound
+        if (makeSound )
+        GetComponent<AudioSource>().PlayOneShot(splatSound);
 
 
 
         if (doShatter)
         {
             
-            Color splatColor = Color.white;
+            
             float splatSize = 1f;
+            bool doShards = true;
             switch(current_food){
                 case FoodTypes.vinegar:
                     splatColor = new Color(165f / 255f, 128f / 255f, 89f / 255f, .5f);
                     break;
                 case FoodTypes.salt:
-                    splatSize = .3f;
+                    splatSize = .6f;
                     splatColor.a = .4f;
                     break;
                 case FoodTypes.pepper:
-                    splatSize = .3f;
+                    splatSize = .6f;
                     splatColor = Color.gray;
                     splatColor.a = .4f;
                     break;
                 case FoodTypes.paprika:
-                    splatSize = .4f;
+                    splatSize = .8f;
                     splatColor = Color.red;
                     splatColor.a = .4f;
                     break;
                 default:
+                    doShards = false;
                     break;
             }
 
             // instantiage glass shatter
-           // var myShatter = Instantiate(shardObj);
-           // myShatter.transform.position = transform.position;
+            if (doShards)
+            {
+                var myShatter = Instantiate(shardObj);
+                myShatter.transform.position = transform.position;
+            }
+           
 
 
             //instantly turn into splat, without playing rotting sound
@@ -353,16 +372,20 @@ public class FoodItem : MonoBehaviour {
             foodSR.color = splatColor;
             transform.localScale *= splatSize;
 
-            isChef = false;
+           
 
 
         }
-
+        if (countdowntimer < 0)
+        {
+            GoBad(true);
+        }
+        
         if (isChef)
         {
             foodSR.enabled = false;
             rb2d.simulated = false;
-
+            
             Invoke("goAway", 5f);
 
         }
@@ -397,15 +420,31 @@ public class FoodItem : MonoBehaviour {
     //do something here when the food goes bad?!
     private void GoBad(bool doRottenSound = true)
     {
+        
 
         if (doRottenSound)
         {
             // play rotten sound here
+            
+            
+
+            foodSR.sprite = foodSplat;
+            foodSR.color = new Color(DecayColor.r, DecayColor.g, DecayColor.b, .5f);
+            
+
+        }
+        else
+        {
+            foodSR.sprite = liquidSplat;
+            rb2d.simulated = false;
+            foodSR.color = splatColor;
+            
         }
 
 
         gameObject.tag = "slippery";
-        foodSR.color = new Color(DecayColor.r, DecayColor.g, DecayColor.b, .5f);
+        
+        
         gameObject.layer = 10;
 
         //remove this script so it doesn't update anymore and just stays as a sprite renderer

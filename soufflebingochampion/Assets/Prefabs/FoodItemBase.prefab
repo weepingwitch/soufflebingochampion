@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114806111659184758}
   - component: {fileID: 58278770268838406}
   - component: {fileID: 50006860808458824}
+  - component: {fileID: 82319994405486762}
   m_Layer: 0
   m_Name: FoodItemBase
   m_TagString: fooditem
@@ -107,6 +108,86 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!82 &82319994405486762
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1813284550702038}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114806111659184758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,8 +202,10 @@ MonoBehaviour:
   foodSR: {fileID: 212443566749216498}
   DecayColor: {r: 0.5514706, g: 0.2852434, b: 0, a: 1}
   rb2d: {fileID: 50006860808458824}
-  shardObj: {fileID: 0}
-  splatObj: {fileID: 0}
+  shardObj: {fileID: 1458023123417072, guid: 91a26a0675ba4744aaaa1531ce5c9ae3, type: 2}
+  foodSplat: {fileID: 21300000, guid: 751c046e082f4294e82f36fa036f5ac9, type: 3}
+  liquidSplat: {fileID: 21300000, guid: a1622351e2439e347af63c32629cd64a, type: 3}
+  splatColor: {r: 1, g: 1, b: 1, a: 1}
   canBounce: 1
   canStun: 0
   canPickUp: 0
@@ -161,7 +244,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -447563927
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
