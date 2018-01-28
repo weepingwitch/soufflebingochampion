@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodItem : MonoBehaviour {
 
 
-    public enum FoodTypes { eggs, butter, cheese, milk, chocolate, flour, nutmeg, paprika, pepper, salt, vanilla, cream, sugar, raspberry, strawberry, lemon, potato, vinegar, oregano, parsley, apple, sweetpotato, s, t, u, v, w, x, y, z  }
+    public enum FoodTypes { eggs, butter, cheese, milk, chocolate, flour, nutmeg, paprika, pepper, salt, vanilla, cream, sugar, raspberry, strawberry, lemon, potato, vinegar, oregano, parsley, apple, sweetpotato, cinnamon, t, u, v, w, x, y, z  }
 
     
 
