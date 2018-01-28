@@ -244,8 +244,8 @@ public class FoodItem : MonoBehaviour {
             }
 
             // instantiage glass shatter
-            var myShatter = Instantiate(shardObj);
-            myShatter.transform.position = transform.position;
+           // var myShatter = Instantiate(shardObj);
+           // myShatter.transform.position = transform.position;
 
 
             //instantly turn into splat, without playing rotting sound

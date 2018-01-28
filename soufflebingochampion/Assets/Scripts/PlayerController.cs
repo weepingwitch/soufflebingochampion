@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 
     private bool holdingFood = false;
 
+    private bool canDoAction = true;
+
 
     private FoodItem.FoodTypes heldFood = FoodItem.FoodTypes.cheese ;
 
@@ -81,8 +83,14 @@ public class PlayerController : MonoBehaviour {
         //handle being pushed
         if (pushcount > 0)
         {
+            pimg.color = Color.red;
             pushcount -= Time.deltaTime;
             rb2d.velocity += pushDirect;
+            if (pushcount <= 0)
+            {
+                pimg.color = Color.white;
+                canDoAction = true;
+            }
         }
 
 
@@ -90,7 +98,14 @@ public class PlayerController : MonoBehaviour {
         {
             slideCountdown -= Time.deltaTime;
             rb2d.velocity += slideDirection;
+            pimg.color = Color.gray;
+            if (slideCountdown <= 0)
+            {
+                pimg.color = Color.white;
+                canDoAction = true;
+            }
         }
+        
         
         //handle aiming and sprite direction
         Vector2 aimdirect = im.getPlayerAim(playerNum);
@@ -132,7 +147,7 @@ public class PlayerController : MonoBehaviour {
 
 
         //handle throwing
-        if (readyToThrow)
+        if (readyToThrow && canDoAction)
         {
            
             if (im.getPlayerShoot(playerNum) && holdingFood)
@@ -173,7 +188,7 @@ public class PlayerController : MonoBehaviour {
             //if it is still an active food
             if (theFood != null)
             {
-                if (!theFood.isbeingthrown)
+                if (!theFood.isbeingthrown && canDoAction)
                 {
                     pickupFood(theFood);
                 }
@@ -189,7 +204,7 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("slippery"))
         {
             //Debug.Log("slipping!");
-
+            canDoAction = false;
             slideCountdown = .05f;
         }
     }
@@ -207,7 +222,7 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-
+        canDoAction = false;
         pushDirect = stunDirect*8f;
         pushcount = .25f;
        
