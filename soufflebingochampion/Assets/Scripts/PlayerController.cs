@@ -254,6 +254,12 @@ public class PlayerController : MonoBehaviour {
             pushDirect = Vector2.zero;
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.CompareTag("conveyerSpot"))
+        {
+
+            Vector2 movevect = collision.gameObject.GetComponent<ConveyerSpot>().moveVect;
+            transform.position += (Vector3)movevect * Time.deltaTime;
+        }
     }
 
     //called when hit by a food
