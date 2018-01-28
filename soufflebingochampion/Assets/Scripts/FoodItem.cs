@@ -30,6 +30,8 @@ public class FoodItem : MonoBehaviour {
     private float throwtimer;
     private Vector2 origvel;
 
+    private bool isGoingIntoOven;
+
 
     public int owner;
 
@@ -62,9 +64,36 @@ public class FoodItem : MonoBehaviour {
 
     }
 
+    public void goIntoOven(Oven newparent)
+    {
+        rb2d.simulated = false;
+        gameObject.tag = "donefood";
+        transform.parent = newparent.transform;
+        isGoingIntoOven = true;
+    }
+
 
 	// Update is called once per frame
 	void Update () {
+
+        if (isGoingIntoOven)
+        {
+
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime*2f);
+            if (transform.localPosition.magnitude < .1f)
+            {
+                transform.parent.GetComponent<Oven>().DoCook(this);
+
+
+
+            }
+
+
+
+            return;
+        }
+
+
 
         if (isbeingthrown)
         {

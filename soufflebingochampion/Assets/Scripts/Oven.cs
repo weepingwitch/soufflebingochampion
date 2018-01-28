@@ -22,8 +22,23 @@ public class Oven : MonoBehaviour {
 		
 	}
 
+    //process the food item
+    public void DoCook(FoodItem theFood)
+    {
+        bool isGood = myBoard.AddItem(theFood.GetFoodType());
+
+        //do something here to indicate success
+        if (isGood)
+        {
+
+        }
 
 
+        Destroy(theFood.gameObject);
+    }
+
+
+    //start receiving the food item
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("fooditem"))
@@ -34,9 +49,10 @@ public class Oven : MonoBehaviour {
             if (theFood != null)
             {
                 if (!theFood.IsCurrentlyDecaying() && theFood.owner == ownerNum)
-                myBoard.AddItem(theFood.GetFoodType());
                 
-                Destroy(theFood.gameObject);
+
+                theFood.goIntoOven(this);
+                //Destroy(theFood.gameObject);
             }
         }
     }
