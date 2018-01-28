@@ -16,7 +16,7 @@ public class BingoBoard : MonoBehaviour {
     private List<FoodItem.FoodTypes> winningfoods;
 
     [SerializeField]
-    private int myid;
+    private int myId;
 
     [SerializeField]
     private BingoSquare squareBase;
@@ -96,30 +96,31 @@ public class BingoBoard : MonoBehaviour {
             goalboard[i] = randomlist[i];
             squares[i] = Instantiate(squareBase, transform);
             squares[i].transform.localPosition = new Vector3(i/5, i%5, 0);
-            squares[i].setfood(randomlist[i]);
+            squares[i].setFood(randomlist[i]);
+            squares[i].setPlayerId(myId);
         }
     }
 
     //set this as belonging to player 1 or 2 or whatever
     public void SetPlayerNumber(int newplayernum)
     {
-        myid = newplayernum;
+        myId = newplayernum;
     }
 
     //return which player this belongs to
     public int GetPlayerNumber()
     {
-        return myid;
+        return myId;
     }
 
 
     //called when this person gets a bingo
     private void DoWin()
     {
-       
-        gc.PlayerWon(myid, winningfoods.ToArray()) ;
+
+        gc.PlayerWon(myId, winningfoods.ToArray()) ;
         #if UNITY_EDITOR
-             //   Debug.Log("player " + myid + " won!!!");
+             //   Debug.Log("player " + myId + " won!!!");
         #endif
 
     }
@@ -137,7 +138,7 @@ public class BingoBoard : MonoBehaviour {
 
         winningfoods.Sort();
         winningfoods.Reverse();
-        
+
 
     }
 
