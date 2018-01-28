@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stove : MonoBehaviour {
+public class Oven : MonoBehaviour {
 
     [SerializeField]
     private BingoBoard myBoard;

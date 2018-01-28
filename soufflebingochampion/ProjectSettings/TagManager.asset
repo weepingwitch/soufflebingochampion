@@ -46,7 +46,7 @@ TagManager:
   - name: BACKGROUNDFLOOR
     uniqueID: 1298631719
     locked: 0
-  - name: STOVE
+  - name: OVEN
     uniqueID: 3013159867
     locked: 0
   - name: FOODITEM
