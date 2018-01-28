@@ -324,7 +324,7 @@ public class FoodItem : MonoBehaviour {
         }
 
         //play the sound here - splatSound
-        if (makeSound)
+        if (makeSound )
         GetComponent<AudioSource>().PlayOneShot(splatSound);
 
 
@@ -372,7 +372,7 @@ public class FoodItem : MonoBehaviour {
             foodSR.color = splatColor;
             transform.localScale *= splatSize;
 
-            isChef = false;
+           
 
 
         }
@@ -385,7 +385,7 @@ public class FoodItem : MonoBehaviour {
         {
             foodSR.enabled = false;
             rb2d.simulated = false;
-
+            
             Invoke("goAway", 5f);
 
         }

@@ -218,10 +218,11 @@ public class PlayerController : MonoBehaviour {
         int ds1 = Mathf.FloorToInt(dirtyAmt);
         int ds2 = Mathf.Min(4, Mathf.CeilToInt(dirtyAmt));
 
-        if (ds1 == ds2 || ds2 == 4)
+        if (ds2 == 4 || ds1 == 4)
         {
             dirtySprite2.SetActive(false);
             dirtySprite.GetComponent<SpriteRenderer>().sprite = dirtySpriteArray[3];
+            return;
         }
         if (ds1 <= 0)
         {
