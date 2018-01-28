@@ -27,12 +27,12 @@ public class Oven : MonoBehaviour {
         statusMessage.SetActive(false);
 
         // set the color of the statusMessage background image
-        Graphic image = statusMessage.GetComponent<Image>().GetComponent<Graphic>();
+       // Graphic image = statusMessage.GetComponent<Image>().GetComponent<Graphic>();
         // chef
         if (ownerNum == 0)
         {
             Color chefBlue = new Color(97/255f, 96/255f, 251/255f, 100/255f);
-            image.color = chefBlue;
+        //    image.color = chefBlue;
         }
 
         // guy
@@ -40,7 +40,7 @@ public class Oven : MonoBehaviour {
         {
             //Color guyRed = new Color(199/255f, 0, 8/255f, 100/255f);
             Color guyRed = new Color(199/255f, 51/255f, 57/255f, 100/255f);
-            image.color = guyRed;
+         //   image.color = guyRed;
         }
 	}
 
@@ -61,12 +61,12 @@ public class Oven : MonoBehaviour {
                 StartCoroutine(ShowPopup(successMark, popupDuration));
                 break;
             case BingoBoard.MatchResult.repeat:
-                statusMessage.GetComponentInChildren<Text>().text = "Ingredient already added";
+               // statusMessage.GetComponentInChildren<Text>().text = "Ingredient already added";
                 StartCoroutine(ShowPopup(statusMessage, popupDuration));
                 StartCoroutine(ShowPopup(failureMark, popupDuration));
                 break;
             case BingoBoard.MatchResult.failure:
-                statusMessage.GetComponentInChildren<Text>().text = "Wrong ingredient";
+              //  statusMessage.GetComponentInChildren<Text>().text = "Wrong ingredient";
                 StartCoroutine(ShowPopup(statusMessage, popupDuration));
                 StartCoroutine(ShowPopup(failureMark, popupDuration));
                 break;

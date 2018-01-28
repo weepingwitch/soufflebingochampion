@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4563734847773312}
   - component: {fileID: 212847664449256824}
   m_Layer: 0
-  m_Name: checkMark
+  m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
