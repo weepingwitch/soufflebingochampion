@@ -61,9 +61,9 @@ public class BingoBoard : MonoBehaviour {
 
 
     //called to add an ingredient to the bingo board
-    public void AddItem(FoodItem.FoodTypes newitem)
+    public bool AddItem(FoodItem.FoodTypes newitem)
     {
-
+        bool res = false;
         //compare new food to goal board, mark spot as completed if match
         for (int i = 0; i < goalboard.Length; i++)
         {
@@ -71,14 +71,16 @@ public class BingoBoard : MonoBehaviour {
             {
                 myBoard.Set(i, true);
                 squares[i].markFilled();
+                res = true;
             }
         }
-
+        
         //check if there is a bingo
         if (CheckForBingo())
         {
             DoWin();
         }
+        return res;
 
     }
 
