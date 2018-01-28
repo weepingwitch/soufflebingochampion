@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer pimg, aimIndicator, heldItemImg;
     [SerializeField]
     private GameObject foodBase;
+    [SerializeField]
+    private Sprite whisk, spatula;
 
 
     private Vector2 aim = Vector2.right;
@@ -57,10 +59,12 @@ public class PlayerController : MonoBehaviour {
         if (playerNum == 0)
         {
             gameObject.layer = 8;
+            aimIndicator.sprite = whisk;
         }
         else
         {
             gameObject.layer = 9;
+            aimIndicator.sprite = spatula;
            
         }
 
