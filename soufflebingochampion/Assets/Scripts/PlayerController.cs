@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour {
                 {
 
                     Vector3 stunDirect = transform.position - collision.gameObject.transform.position;
-                    dostun(theFood, stunDirect);
+                    DoStun(theFood, stunDirect);
                 }
            
             }
@@ -195,10 +195,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     //called when hit by a food
-    private void dostun(FoodItem hitfood, Vector3 stunDirect)
+    private void DoStun(FoodItem hitfood, Vector3 stunDirect)
     {
 
-        Destroy(hitfood.gameObject);
+        hitfood.doSplat(true);
 
         if (holdingFood)
         {
@@ -208,8 +208,8 @@ public class PlayerController : MonoBehaviour {
 
 
 
-        pushDirect = stunDirect*4f;
-        pushcount = .15f;
+        pushDirect = stunDirect*8f;
+        pushcount = .25f;
        
     }
 
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour {
 
         if (holdingFood)
         {
-
+            //lol too bad
         }
         else
         {

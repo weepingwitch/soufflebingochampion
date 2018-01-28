@@ -20,6 +20,9 @@ public class FoodItem : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D rb2d;
 
+    [SerializeField]
+    private GameObject shardObj, splatObj;
+
     private bool isDecaying;
 
     private float countdowntimer;
@@ -170,14 +173,107 @@ public class FoodItem : MonoBehaviour {
     //for when food lands on the floor - start the 5 second rule countdown
     public void StartDecay()
     {
+       
         if (!isDecaying)
         {
+            doSplat();
             becomePickUppable();
 
             isDecaying = true;
             countdowntimer = decaytime;
 
         }
+    }
+
+    public void doSplat(bool isChef = false)
+    {
+        AudioClip splatSound;
+        bool doShatter = false;
+      
+
+        switch (current_food)
+        {
+            case FoodTypes.crab:
+            case FoodTypes.eggs:
+                splatSound = null; //crab egg
+                break;
+            case FoodTypes.vinegar:
+                doShatter = true;
+                splatSound = null; // large glass
+                break;
+            case FoodTypes.salt:
+            case FoodTypes.pepper:
+            case FoodTypes.paprika:
+                doShatter = true;
+                splatSound = null; //small glass
+                break;
+            default:
+                splatSound = null; //implement here
+                break;
+        }
+
+        //play the sound here - splatSound
+
+
+
+        if (doShatter)
+        {
+            
+            Color splatColor = Color.white;
+            float splatSize = 1f;
+            switch(current_food){
+                case FoodTypes.vinegar:
+                    splatColor = new Color(165f / 255f, 128f / 255f, 89f / 255f, .5f);
+                    break;
+                case FoodTypes.salt:
+                    splatSize = .3f;
+                    splatColor.a = .4f;
+                    break;
+                case FoodTypes.pepper:
+                    splatSize = .3f;
+                    splatColor = Color.gray;
+                    splatColor.a = .4f;
+                    break;
+                case FoodTypes.paprika:
+                    splatSize = .4f;
+                    splatColor = Color.red;
+                    splatColor.a = .4f;
+                    break;
+                default:
+                    break;
+            }
+
+            // instantiage glass shatter
+            var myShatter = Instantiate(shardObj);
+            myShatter.transform.position = transform.position;
+
+
+            //instantly turn into splat, without playing rotting sound
+            GoBad(false);
+            foodSR.color = splatColor;
+            transform.localScale *= splatSize;
+
+            isChef = false;
+
+
+        }
+
+        if (isChef)
+        {
+            foodSR.enabled = false;
+            rb2d.simulated = false;
+
+            Invoke("goAway", 5f);
+
+        }
+
+    }
+
+
+
+    private void goAway()
+    {
+        Destroy(gameObject);
     }
 
 
@@ -199,8 +295,14 @@ public class FoodItem : MonoBehaviour {
     }
 
     //do something here when the food goes bad?!
-    private void GoBad()
+    private void GoBad(bool doRottenSound = true)
     {
+
+        if (doRottenSound)
+        {
+            // play rotten sound here
+        }
+
 
         gameObject.tag = "slippery";
         foodSR.color = new Color(DecayColor.r, DecayColor.g, DecayColor.b, .5f);
