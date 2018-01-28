@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     private Vector2 slideDirection;
 
     private float moveSpeed = 4f;
-    private float throwStrength = 3f;
+    private float throwStrength = 7f;
 
     private float throwCountdown;
     private float throwTime = .25f;
