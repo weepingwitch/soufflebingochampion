@@ -276,7 +276,8 @@ MonoBehaviour:
   titleIntro: {fileID: 8300000, guid: aa039f7da3aaf4022b1ed381dc74ebaa, type: 3}
   titleLoop: {fileID: 8300000, guid: c497ca67bed434ac098e7938eca46cf0, type: 3}
   victoryIntro: {fileID: 8300000, guid: 0b1029745d9ec40658656d6506c5bf9b, type: 3}
-  victoryLoop: {fileID: 8300000, guid: caa7d800e9f6e4d04a99b66c6d709393, type: 3}
+  victoryLoopChef: {fileID: 8300000, guid: caa7d800e9f6e4d04a99b66c6d709393, type: 3}
+  victoryLoopGuy: {fileID: 8300000, guid: 909b6502e9f9a4987928e9d96c546fd8, type: 3}
   mainMXOut: {fileID: 245247027080284738, guid: bbace9026d19b4ff0aa04996d5c57c9d,
     type: 2}
   mainMXOutTime: 1
@@ -940,6 +941,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c556fc6e43a6946a7bd69fe84592cca1, type: 3}
   p1DeliverFood: {fileID: 8300000, guid: b80c686613f6545d3b765e0d19c4c4f4, type: 3}
   p2DeliverFood: {fileID: 8300000, guid: 0ff1ca2df8f434180897d5beb78e0187, type: 3}
+  slip:
+  - {fileID: 8300000, guid: 12a62e6181e5a437b94145933ed6833f, type: 3}
+  - {fileID: 8300000, guid: a5c8611622b3342e2b2923fd5d408ae4, type: 3}
+  - {fileID: 8300000, guid: bd55dd82cda224968bbbf9d5116ec88d, type: 3}
   pickup: {fileID: 8300000, guid: 8bdc9c1c725c545e3b5c9c69360fbccd, type: 3}
 --- !u!1 &2080476149
 GameObject:

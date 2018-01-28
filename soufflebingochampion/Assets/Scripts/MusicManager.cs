@@ -5,7 +5,21 @@ using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour {
 
+	/* List of functions:
+	 * 
+	 * TitleMX()           				-> Call this to play music on title screen
+	 * MainMX()            				-> Call this when main gameplay starts
+	 * 	MainLayer2, MainLayer3(), etc...-> These sequentially trigger respective layers of music 
+	 * 											that increase in intensity. Haven't decided on 
+	 * 											what these should be tied to yet
+	 * VictoryMX(int player)   				-> Call this when someone wins. 
+	 * 											If winner is the chef, player should be 0
+	 * 											If winner is Guy Fieri, player should be 1									
+	 */
+
 	public static MusicManager instance = null;
+
+
 	AudioSource[] source; //MusicManager's AudioSource, all music plays from here
 						  //source[0, 1]  -> Title
 						  //source [2, 3, 4, 5, 6] -> Main MX
@@ -20,9 +34,11 @@ public class MusicManager : MonoBehaviour {
 
 	//for Victory MX
 	public AudioClip victoryIntro;
-	public AudioClip victoryLoop;
+	public AudioClip victoryLoopChef;
+	public AudioClip victoryLoopGuy;
 	public AudioMixerSnapshot mainMXOut;
 	public float mainMXOutTime = 1f;
+	int playerId; //0 for Chef, 1 for Guy Fieri
 
 	//for Main MX
 	public AudioClip layer1;
@@ -56,7 +72,6 @@ public class MusicManager : MonoBehaviour {
 
 		source = GetComponents<AudioSource> ();
 
-		Debug.Log (source.Length);
 	}
 
 
@@ -95,17 +110,19 @@ public class MusicManager : MonoBehaviour {
 	//Victory music control
 	//____________________________________
 
-	//FIX
-	public void VictoryMX(){
+
+	public void VictoryMX(int player){
 		//if music already playing, fade out music and stop all music playing
 			//load Victory music, set second section to loop, and play
 		if (source [2].isPlaying) {
+			playerId = player;
 			LoadVictoryMX ();
 			mainMXOut.TransitionTo (mainMXOutTime);
 			source [7].Play ();
 			source [0].loop = true;
 			Invoke ("PlayVictoryMX", source [7].clip.length);
 		} else if (!source [2].isPlaying) {
+			playerId = player;
 			LoadVictoryMX ();
 			source [7].Play ();
 			source [0].loop = true;
@@ -115,9 +132,13 @@ public class MusicManager : MonoBehaviour {
 
 
 	//load Victory mx in AudioSource clips
-	void LoadVictoryMX(){
+	public void LoadVictoryMX(){
 		source [7].clip = victoryIntro;
-		source [0].clip = victoryLoop;
+		if (playerId == 0) {
+			source [0].clip = victoryLoopChef;
+		} else if (playerId == 1) {
+			source [0].clip = victoryLoopGuy;
+		}
 	}
 
 	void PlayVictoryMX(){

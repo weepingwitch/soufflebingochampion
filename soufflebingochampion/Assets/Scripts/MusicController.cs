@@ -14,7 +14,11 @@ public class MusicController : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown ("e")) {
-			MusicManager.instance.VictoryMX ();
+			MusicManager.instance.VictoryMX (0);
+		}
+
+		if (Input.GetKeyDown ("d")) {
+			MusicManager.instance.VictoryMX (1);
 		}
 
 		if (Input.GetKeyDown ("w")) {
