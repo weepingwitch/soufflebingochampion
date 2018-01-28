@@ -34,12 +34,20 @@ public class GameController : MonoBehaviour {
     void Start () {
         im = InputManager.instance;
         MusicManager.instance.MainMX();
-		
+        //Invoke("freezeTime", 2f);	
 	}
+
+    void freezeTime()
+    {
+        //MusicManager.instance.VictoryMX(1);
+        Time.timeScale = 0f;
+    }
 
     //called from the bingo board when someone has won!!!
     public void PlayerWon(int playerNum, FoodItem.FoodTypes[] winningfoods)
     {
+
+        freezeTime();
         MusicManager.instance.VictoryMX(playerNum);
         resultsScreen.SetActive(true);
 
