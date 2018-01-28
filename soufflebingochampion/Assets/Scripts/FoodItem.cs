@@ -182,7 +182,7 @@ public class FoodItem : MonoBehaviour {
             //check to see if it is fully decayed
             if (countdowntimer <= 0)
             {
-                doSplat();
+                doSplat(false,false);
                 
             }
 
@@ -295,7 +295,7 @@ public class FoodItem : MonoBehaviour {
         }
     }
 
-    public void doSplat(bool isChef = false)
+    public void doSplat(bool isChef = false, bool makeSound = true)
     {
         AudioClip splatSound;
         bool doShatter = false;
@@ -305,24 +305,27 @@ public class FoodItem : MonoBehaviour {
         {
             case FoodTypes.crab:
             case FoodTypes.eggs:
-                splatSound = null; //crab egg
+                splatSound = SoundManager.instance.eggCrabImpact; //crab egg
+                doShatter = true;
                 break;
             case FoodTypes.vinegar:
                 doShatter = true;
-                splatSound = null; // large glass
+                splatSound = SoundManager.instance.largeGlassImpact; // large glass
                 break;
             case FoodTypes.salt:
             case FoodTypes.pepper:
             case FoodTypes.paprika:
                 doShatter = true;
-                splatSound = null; //small glass
+                splatSound = SoundManager.instance.smallGlassImpact; //small glass
                 break;
             default:
-                splatSound = null; //implement here
+                splatSound = SoundManager.instance.FoodImpact(); //implement here
                 break;
         }
 
         //play the sound here - splatSound
+        if (makeSound)
+        GetComponent<AudioSource>().PlayOneShot(splatSound);
 
 
 
@@ -331,6 +334,7 @@ public class FoodItem : MonoBehaviour {
             
             
             float splatSize = 1f;
+            bool doShards = true;
             switch(current_food){
                 case FoodTypes.vinegar:
                     splatColor = new Color(165f / 255f, 128f / 255f, 89f / 255f, .5f);
@@ -350,12 +354,17 @@ public class FoodItem : MonoBehaviour {
                     splatColor.a = .4f;
                     break;
                 default:
+                    doShards = false;
                     break;
             }
 
             // instantiage glass shatter
-            var myShatter = Instantiate(shardObj);
-            myShatter.transform.position = transform.position;
+            if (doShards)
+            {
+                var myShatter = Instantiate(shardObj);
+                myShatter.transform.position = transform.position;
+            }
+           
 
 
             //instantly turn into splat, without playing rotting sound
