@@ -249,6 +249,12 @@ public class PlayerController : MonoBehaviour {
         {
             //Debug.Log("slipping!");
             canDoAction = false;
+            if (!GetComponent<AudioSource>().isPlaying)
+            {
+                AudioClip sfx = SoundManager.instance.Slip();
+                GetComponent<AudioSource>().PlayOneShot(sfx);
+            }
+           
             slideCountdown = .05f;
         }
         if (collision.gameObject.CompareTag("shards"))
@@ -310,6 +316,8 @@ public class PlayerController : MonoBehaviour {
             heldItemImg.sprite = gc.foodSprites[(int)heldFood];
             //Debug.Log(playerNum + " picked up a " + heldFood);
             Destroy(newfood.gameObject);
+            AudioClip sfx = SoundManager.instance.pickup;
+            GetComponent<AudioSource>().PlayOneShot(sfx);
             return true;
         }
 
@@ -327,6 +335,14 @@ public class PlayerController : MonoBehaviour {
         if (!isdropped)
         {
             foodc.throwfood(throwdirect * throwStrength);
+
+            AudioClip sfx;
+            if (playerNum == 0)
+                sfx = SoundManager.instance.P1Throw();
+            else
+                sfx = SoundManager.instance.P2Throw();
+            GetComponent<AudioSource>().PlayOneShot(sfx);
+
         }
         else
         {

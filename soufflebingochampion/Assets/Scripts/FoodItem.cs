@@ -244,7 +244,7 @@ public class FoodItem : MonoBehaviour {
                 {
                     return;
                 }
-                if (collision.CompareTag("conveyerSpot"))
+                if (collision.CompareTag("conveyerSpot") && !canBounce)
                 {
                     return;
                 }
