@@ -33,12 +33,14 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         im = InputManager.instance;
+        MusicManager.instance.MainMX();
 		
 	}
 
     //called from the bingo board when someone has won!!!
     public void PlayerWon(int playerNum, FoodItem.FoodTypes[] winningfoods)
     {
+        MusicManager.instance.VictoryMX(playerNum);
         resultsScreen.SetActive(true);
 
         string winningDescription = ProcessWinningFood(winningfoods);
