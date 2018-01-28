@@ -21,7 +21,7 @@ public class FoodSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("SpawnAFood", .2f, 1f);
+        InvokeRepeating("SpawnAFood", 1f, 1f);
 
 
         beltImage.transform.localScale = new Vector3(conveyerLength, 1);

@@ -112,7 +112,7 @@ public class BingoBoard : MonoBehaviour {
     //called when this person gets a bingo
     private void DoWin()
     {
-
+        gc.PlayerWon(myid);
         #if UNITY_EDITOR
                 Debug.Log("player " + myid + " won!!!");
         #endif
