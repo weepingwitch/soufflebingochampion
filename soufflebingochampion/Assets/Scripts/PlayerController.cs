@@ -247,6 +247,13 @@ public class PlayerController : MonoBehaviour {
             canDoAction = false;
             slideCountdown = .05f;
         }
+        if (collision.gameObject.CompareTag("shards"))
+        {
+            canDoAction = false;
+            pushcount = .2f;
+            pushDirect = Vector2.zero;
+            Destroy(collision.gameObject);
+        }
     }
 
     //called when hit by a food
