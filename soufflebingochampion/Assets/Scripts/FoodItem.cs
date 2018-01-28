@@ -5,10 +5,10 @@ using UnityEngine;
 public class FoodItem : MonoBehaviour {
 
 
-    public enum FoodTypes { eggs, butter, cheese, milk, chocolate, flour, nutmeg, paprika, pepper, salt, vanilla, cream, sugar, raspberry, strawberry, lemon, potato, vinegar, oregano, parsley, apple, sweetpotato, cinnamon, t, u, v, w, x, y, z  }
-
-    
-
+    public enum FoodTypes { flour, butter, eggs, milk, cream, salt, sugar,
+        vanilla, nuts, vinegar, oregano, parsley, nutmeg, cinnamon, cheese,
+        apple, strawberry, raspberry, lemon, potato, sweetpotato, crab,
+        chocolate, pepper, paprika }
 
     private FoodTypes current_food;
 
@@ -40,13 +40,13 @@ public class FoodItem : MonoBehaviour {
     public bool isbeingthrown = false;
 
 	// Use this for initialization
-	void Start() { 
+	void Start() {
          gc = GameController.instance;
         //SetFoodType(FoodTypes.milk);
 
         //throwfood(Vector2.left*2f);
-        
- 
+
+
 
 	}
 
@@ -59,14 +59,14 @@ public class FoodItem : MonoBehaviour {
         throwtime = duration;
         throwtimer = throwtime;
         isbeingthrown = true;
-        
+
 
     }
 
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
         if (isbeingthrown)
         {
             throwtimer -= Time.deltaTime;
@@ -83,8 +83,8 @@ public class FoodItem : MonoBehaviour {
 
             }
 
-            
-            
+
+
         }
 
 
@@ -100,7 +100,7 @@ public class FoodItem : MonoBehaviour {
 
             //check to see if it is fully decayed
             if (countdowntimer <= 0)
-            { 
+            {
                 GoBad();
             }
 
@@ -125,7 +125,7 @@ public class FoodItem : MonoBehaviour {
             gc = GameController.instance;
         current_food = newtype;
         foodSR.sprite = gc.foodSprites[(int)newtype];
-        
+
         if (dropped)
         {
             Invoke("becomePickUppable", .5f);
@@ -145,7 +145,7 @@ public class FoodItem : MonoBehaviour {
         if (!isDecaying)
         {
             becomePickUppable();
-           
+
             isDecaying = true;
             countdowntimer = decaytime;
 
@@ -181,7 +181,7 @@ public class FoodItem : MonoBehaviour {
         //remove this script so it doesn't update anymore and just stays as a sprite renderer
         Destroy(this);
 
-       
+
     }
 
 
