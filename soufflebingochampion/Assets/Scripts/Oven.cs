@@ -16,7 +16,6 @@ public class Oven : MonoBehaviour {
     [SerializeField]
     public GameObject statusMessage;
 
-
     private GameController gc;
 
 	// Use this for initialization
@@ -25,23 +24,6 @@ public class Oven : MonoBehaviour {
         successMark.enabled = false;
         failureMark.enabled = false;
         statusMessage.SetActive(false);
-
-        // set the color of the statusMessage background image
-       // Graphic image = statusMessage.GetComponent<Image>().GetComponent<Graphic>();
-        // chef
-        if (ownerNum == 0)
-        {
-            Color chefBlue = new Color(97/255f, 96/255f, 251/255f, 100/255f);
-        //    image.color = chefBlue;
-        }
-
-        // guy
-        else
-        {
-            //Color guyRed = new Color(199/255f, 0, 8/255f, 100/255f);
-            Color guyRed = new Color(199/255f, 51/255f, 57/255f, 100/255f);
-         //   image.color = guyRed;
-        }
 	}
 
 	// Update is called once per frame
@@ -61,12 +43,12 @@ public class Oven : MonoBehaviour {
                 StartCoroutine(ShowPopup(successMark, popupDuration));
                 break;
             case BingoBoard.MatchResult.repeat:
-               // statusMessage.GetComponentInChildren<Text>().text = "Ingredient already added";
+                statusMessage.GetComponentInChildren<Text>().text = "Ingredient already added";
                 StartCoroutine(ShowPopup(statusMessage, popupDuration));
                 StartCoroutine(ShowPopup(failureMark, popupDuration));
                 break;
             case BingoBoard.MatchResult.failure:
-              //  statusMessage.GetComponentInChildren<Text>().text = "Wrong ingredient";
+                statusMessage.GetComponentInChildren<Text>().text = "Wrong ingredient";
                 StartCoroutine(ShowPopup(statusMessage, popupDuration));
                 StartCoroutine(ShowPopup(failureMark, popupDuration));
                 break;
