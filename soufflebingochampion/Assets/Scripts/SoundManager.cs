@@ -6,6 +6,16 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour {
 
+	/* List of functions:
+	 * 
+	 * FoodImpact() 
+	 * P1Throw() 
+	 * P2Throw()
+	 * FoodRot()
+	 * Slip()
+	 */
+
+
 	public static SoundManager instance = null;
 
 	AudioSource[] source;
@@ -26,7 +36,9 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip p1DeliverFood; //DeliverFoodP1
 	public AudioClip p2DeliverFood; //DeliverFoodP2
 
-	public AudioClip pickup; //FoodPickup
+	public AudioClip[] slip; //slip sfx
+
+	public AudioClip pickup; //foodPickup
 
 
 	void Awake () {
@@ -98,7 +110,22 @@ public class SoundManager : MonoBehaviour {
 				randClip = Random.Range (0, foodRot.Length - 1);
 			}
 		}
-		clip = p2Throw[randClip];
+		clip = foodRot[randClip];
+		lastClip = randClip;
+		return clip;
+	}
+
+	//Call to select random slip sfx
+	public AudioClip Slip(){
+		AudioClip clip;
+		int lastClip = -1;
+		int randClip = Random.Range (0, slip.Length - 1); 
+		if (randClip == lastClip) {
+			while (randClip == lastClip) {
+				randClip = Random.Range (0, slip.Length - 1);
+			}
+		}
+		clip = slip[randClip];
 		lastClip = randClip;
 		return clip;
 	}

@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1101020881975322}
+  m_IsPrefabParent: 1
+--- !u!1 &1101020881975322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4592366622259552}
+  - component: {fileID: 114026261658663372}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4592366622259552
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101020881975322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114026261658663372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101020881975322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1f0a302cee04fc580ce656992cb5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodImpact:
+  - {fileID: 8300000, guid: d515a3bb224e243d49f7cabdeb9c7841, type: 3}
+  - {fileID: 8300000, guid: cecc106413ec84872bd837f24dd8cbd1, type: 3}
+  - {fileID: 8300000, guid: cf5d56bc76b1149c8ba8eafceef0d563, type: 3}
+  - {fileID: 8300000, guid: 277504212de5c4ee08b2e3fee49f4d10, type: 3}
+  - {fileID: 8300000, guid: 0cb7e825ccff44b038dbf788410f0493, type: 3}
+  eggCrabImpact: {fileID: 8300000, guid: 29d380a99d06b49b38fb8a662c326f7d, type: 3}
+  smallGlassImpact: {fileID: 8300000, guid: f1a9e84a9b86c4c98b8c3ba21908ed2b, type: 3}
+  largeGlassImpact: {fileID: 8300000, guid: ab33d07cd1e374570a7e078530e6e76a, type: 3}
+  p1Throw:
+  - {fileID: 8300000, guid: d7f906070ee06457580d63b4fbfc716c, type: 3}
+  - {fileID: 8300000, guid: b2f7f0265447e410f8661b9f3ecf7d11, type: 3}
+  - {fileID: 8300000, guid: c47f683deddf9439b9b5959ae74de3c1, type: 3}
+  p2Throw:
+  - {fileID: 8300000, guid: f098c60b2953d4227a1d8cb5b62f149f, type: 3}
+  - {fileID: 8300000, guid: 75fd1b59e898445e1bc97a7640217921, type: 3}
+  - {fileID: 8300000, guid: c2236cbd04584497ea35ad8acad70555, type: 3}
+  foodRot:
+  - {fileID: 8300000, guid: 1ef32d88c35094d43a611313080aa3b2, type: 3}
+  - {fileID: 8300000, guid: c468dd60b2dd74979ac255d2e6272e01, type: 3}
+  - {fileID: 8300000, guid: 5ee44f5dbdf5f463aad98d2c38ebf5dd, type: 3}
+  - {fileID: 8300000, guid: c556fc6e43a6946a7bd69fe84592cca1, type: 3}
+  p1DeliverFood: {fileID: 8300000, guid: b80c686613f6545d3b765e0d19c4c4f4, type: 3}
+  p2DeliverFood: {fileID: 8300000, guid: 0ff1ca2df8f434180897d5beb78e0187, type: 3}
+  slip:
+  - {fileID: 8300000, guid: 12a62e6181e5a437b94145933ed6833f, type: 3}
+  - {fileID: 8300000, guid: a5c8611622b3342e2b2923fd5d408ae4, type: 3}
+  - {fileID: 8300000, guid: bd55dd82cda224968bbbf9d5116ec88d, type: 3}
+  pickup: {fileID: 8300000, guid: 8bdc9c1c725c545e3b5c9c69360fbccd, type: 3}

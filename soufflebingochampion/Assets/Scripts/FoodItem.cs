@@ -34,14 +34,17 @@ public class FoodItem : MonoBehaviour {
     private Vector2 origvel;
 
     private bool isGoingIntoOven;
+    public bool canBounce = false;
+    public bool canStun = false;
+    public bool canPickUp = false;
 
 
-    public int owner;
+    public int owner = -1;
 
     private GameController gc;
 
 
-    public bool isbeingthrown = false;
+    public bool isBeingThrown = false;
 
 	// Use this for initialization
 	void Start() {
@@ -62,9 +65,49 @@ public class FoodItem : MonoBehaviour {
         origvel = direct;
         throwtime = duration;
         throwtimer = throwtime;
-        isbeingthrown = true;
+        isBeingThrown = true;
+        Invoke("makeBounceable", .3f);
+        Invoke("makePickUppable", .5f);
+        makeStunnable();
 
 
+
+    }
+
+    private void makePickUppable()
+    {
+        canPickUp = true;
+    }
+
+    private void makeStunnable()
+    {
+        canStun = true;
+    }
+
+    public void doBounce()
+    {
+        if (owner == -1)
+        {
+            return;
+        }
+      //  Debug.Log("trying to bounce");
+        if (isBeingThrown && canBounce)
+        {
+            Vector3 slightBounce = Random.insideUnitCircle.normalized;
+            origvel = -origvel;
+            origvel = Vector3.Lerp(origvel, slightBounce, .3f);
+            rb2d.velocity = -rb2d.velocity;
+            rb2d.velocity = Vector2.Lerp(rb2d.velocity, (Vector2)slightBounce, .3f);
+            canBounce = false;
+            canStun = true;
+            isBeingThrown = true;
+            Invoke("makeBounceable", .3f);
+        }
+    }
+
+    private void makeBounceable()
+    {
+        canBounce = true;
     }
 
     public void goIntoOven(Oven newparent)
@@ -78,6 +121,8 @@ public class FoodItem : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+        
 
         if (isGoingIntoOven)
         {
@@ -98,7 +143,7 @@ public class FoodItem : MonoBehaviour {
 
 
 
-        if (isbeingthrown)
+        if (isBeingThrown)
         {
             throwtimer -= Time.deltaTime;
             if (throwtimer < 1f)
@@ -107,7 +152,7 @@ public class FoodItem : MonoBehaviour {
 
                 if (throwtimer <= 0f)
                 {
-                    isbeingthrown = false;
+                    isBeingThrown = false;
                     rb2d.velocity = Vector2.zero;
                     StartDecay();
                 }
@@ -137,11 +182,66 @@ public class FoodItem : MonoBehaviour {
 
         }
 
+
+
+        CheckBounds();
+
+
 	}
 
 
+    private void CheckBounds()
+    {
+        
+        if (transform.position.x < -8.5f || transform.position.x > 8.5f || transform.position.y > 5f || transform.position.y < -5f)
+        {
+            doBounce();
+        }
 
+    }
 
+  
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("slippery"))
+        {
+            var otherFood = collision.gameObject.GetComponent<FoodItem>();
+            if (otherFood != null && otherFood.IsCurrentlyDecaying())
+                return;
+           // Debug.Log("calling hit from food trigger");
+            var playObj = collision.gameObject.GetComponent<PlayerController>();
+            if (playObj != null)
+            {
+                if (playObj.playerNum == owner)
+                {
+                   // Debug.Log("hit owner");
+                    return;
+                }
+                if (owner == -1)
+                {
+                  //  Debug.Log("has no owner");
+                    return;
+                }
+                else
+                {
+                //    Debug.Log("hit enemy player?!");
+                    playObj.DoStun(this, (playObj.transform.position - transform.position));
+                }
+
+            }
+            else
+            {
+             //   Debug.Log("hit non-player");
+                var otherOven = collision.gameObject.GetComponent<Oven>();
+                if (otherOven != null && otherOven.ownerNum == owner)
+                {
+                    return;
+                }
+            }
+            doBounce();
+        }
+    }
 
     //get what the current food item is
     public FoodTypes GetFoodType()

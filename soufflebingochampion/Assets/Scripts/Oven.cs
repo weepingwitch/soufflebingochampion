@@ -7,7 +7,7 @@ public class Oven : MonoBehaviour {
     [SerializeField]
     private BingoBoard myBoard;
     [SerializeField]
-    private int ownerNum;
+    public int ownerNum;
 
 
     private GameController gc;
@@ -49,9 +49,10 @@ public class Oven : MonoBehaviour {
             if (theFood != null)
             {
                 if (!theFood.IsCurrentlyDecaying() && theFood.owner == ownerNum)
-                
 
-                theFood.goIntoOven(this);
+
+                    theFood.goIntoOven(this);
+               
                 //Destroy(theFood.gameObject);
             }
         }

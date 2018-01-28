@@ -121,8 +121,13 @@ MonoBehaviour:
   foodSR: {fileID: 212443566749216498}
   DecayColor: {r: 0.5514706, g: 0.2852434, b: 0, a: 1}
   rb2d: {fileID: 50006860808458824}
-  owner: 0
-  isbeingthrown: 0
+  shardObj: {fileID: 0}
+  splatObj: {fileID: 0}
+  canBounce: 1
+  canStun: 0
+  canPickUp: 0
+  owner: -1
+  isBeingThrown: 0
 --- !u!212 &212443566749216498
 SpriteRenderer:
   m_ObjectHideFlags: 1
