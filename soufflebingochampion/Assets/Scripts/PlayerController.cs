@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour {
     private void doThrow(Vector2 throwdirect, bool isdropped = false)
     {
         var thrown = Instantiate(foodBase);
-        thrown.transform.position = transform.position;
+        thrown.transform.position = heldItemImg.transform.position + (Vector3)throwdirect/2f ;
         if (playerNum == 0)
         {
             thrown.layer = 8;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BingoBoard : MonoBehaviour {
@@ -12,6 +13,8 @@ public class BingoBoard : MonoBehaviour {
 
     private FoodItem.FoodTypes[] goalboard;
 
+    private List<FoodItem.FoodTypes> winningfoods;
+
     [SerializeField]
     private int myid;
 
@@ -23,6 +26,7 @@ public class BingoBoard : MonoBehaviour {
     {
         //initialize the values
         myBoard = new BitArray(25);
+        winningfoods = new List<FoodItem.FoodTypes>();
         solutions = new BitArray[12];
         goalboard = new FoodItem.FoodTypes[25];
         squares = new BingoSquare[25];
@@ -112,13 +116,30 @@ public class BingoBoard : MonoBehaviour {
     //called when this person gets a bingo
     private void DoWin()
     {
-        gc.PlayerWon(myid);
+       
+        gc.PlayerWon(myid, winningfoods.ToArray()) ;
         #if UNITY_EDITOR
-                Debug.Log("player " + myid + " won!!!");
+             //   Debug.Log("player " + myid + " won!!!");
         #endif
 
     }
 
+
+    private void SetWinningIngredients(BitArray winningpattern)
+    {
+        for (int i = 0; i < winningpattern.Length; i++)
+        {
+            if (winningpattern[i])
+            {
+                winningfoods.Add(goalboard[i]);
+            }
+        }
+
+        winningfoods.Sort();
+        winningfoods.Reverse();
+        
+
+    }
 
 
 
@@ -139,7 +160,10 @@ public class BingoBoard : MonoBehaviour {
             {
                 //DebugPrintBoard(myboard);
                 //DebugPrintBoard(solutions[i]);
-               // DebugPrintBoard(ConvertBitArray(new BitArray((mycardint & cursolution)));
+                // DebugPrintBoard(ConvertBitArray(new BitArray((mycardint & cursolution)));
+
+                SetWinningIngredients(solutions[i]);
+
 
                 return true;
 

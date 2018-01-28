@@ -171,46 +171,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprites:
-  - {fileID: 21300000, guid: 8069ef2104574064f8b45978f1b30ba7, type: 3}
-  - {fileID: 21300000, guid: 3f3543930796b2d4187e0c8846ed2874, type: 3}
-  - {fileID: 21300000, guid: 139ebbe3f1b481b49a92732517e63d16, type: 3}
-  - {fileID: 21300000, guid: 4a3c1ea5e6757d147921bb7fb792b6be, type: 3}
-  - {fileID: 21300000, guid: c3ad0c073c20f3d45ae18194c02f0f99, type: 3}
   - {fileID: 21300000, guid: ac288a99ae5d0f2459e462ebfa3cc079, type: 3}
-  - {fileID: 21300000, guid: 20f5b9d731fcb464caa33d64afabe72e, type: 3}
-  - {fileID: 21300000, guid: d9b1ff9e9ca05f54b97dfdd14775c083, type: 3}
-  - {fileID: 21300000, guid: 02e85b367e9da704d85ccccd630f291b, type: 3}
-  - {fileID: 21300000, guid: fac57453e1809e24394c8a5b64765bcf, type: 3}
-  - {fileID: 21300000, guid: 9e4232c5e2b4e874295141c1c34663af, type: 3}
+  - {fileID: 21300000, guid: 3f3543930796b2d4187e0c8846ed2874, type: 3}
+  - {fileID: 21300000, guid: 8069ef2104574064f8b45978f1b30ba7, type: 3}
+  - {fileID: 21300000, guid: 4a3c1ea5e6757d147921bb7fb792b6be, type: 3}
   - {fileID: 21300000, guid: 471573fe48d1fec46bd0f0af0f6fcf8c, type: 3}
+  - {fileID: 21300000, guid: fac57453e1809e24394c8a5b64765bcf, type: 3}
   - {fileID: 21300000, guid: d1014eef3e1c44b4bb417e8baee014db, type: 3}
-  - {fileID: 21300000, guid: 57692eb2c082834449f60ece9ef5294c, type: 3}
-  - {fileID: 21300000, guid: 4964a5b18dff7b649a7185e5f826bee4, type: 3}
-  - {fileID: 21300000, guid: c1379d46b3381a14a9141f70b1b7b46d, type: 3}
-  - {fileID: 21300000, guid: 413a6e6899dea3c41827989af132ffd8, type: 3}
+  - {fileID: 21300000, guid: 9e4232c5e2b4e874295141c1c34663af, type: 3}
+  - {fileID: 21300000, guid: d268bac9c2cd8914f92f581ab60c2362, type: 3}
   - {fileID: 21300000, guid: 4023fc150598cb742942ade3ce9c247b, type: 3}
   - {fileID: 21300000, guid: 2d92986fda623564e806451de70ef09d, type: 3}
   - {fileID: 21300000, guid: f128007076c77c44dba1be619c7222c3, type: 3}
-  - {fileID: 21300000, guid: 687264f030c484d4f966418706dea96c, type: 3}
-  - {fileID: 21300000, guid: 17d2047e9d4111144b6f42f153f4a7c9, type: 3}
+  - {fileID: 21300000, guid: 20f5b9d731fcb464caa33d64afabe72e, type: 3}
   - {fileID: 21300000, guid: 84f4d2ee81a9f5a4a9554f8a561c53b1, type: 3}
+  - {fileID: 21300000, guid: 139ebbe3f1b481b49a92732517e63d16, type: 3}
+  - {fileID: 21300000, guid: 687264f030c484d4f966418706dea96c, type: 3}
+  - {fileID: 21300000, guid: 4964a5b18dff7b649a7185e5f826bee4, type: 3}
+  - {fileID: 21300000, guid: 57692eb2c082834449f60ece9ef5294c, type: 3}
+  - {fileID: 21300000, guid: c1379d46b3381a14a9141f70b1b7b46d, type: 3}
+  - {fileID: 21300000, guid: 413a6e6899dea3c41827989af132ffd8, type: 3}
+  - {fileID: 21300000, guid: 17d2047e9d4111144b6f42f153f4a7c9, type: 3}
   - {fileID: 21300000, guid: 9e03e6a773baf3b498d6fbcaab91c452, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
-  - {fileID: 21300000, guid: 3b864f06d43704548ac5a4bbb41cfd46, type: 3}
+  - {fileID: 21300000, guid: c3ad0c073c20f3d45ae18194c02f0f99, type: 3}
+  - {fileID: 21300000, guid: 02e85b367e9da704d85ccccd630f291b, type: 3}
+  - {fileID: 21300000, guid: d9b1ff9e9ca05f54b97dfdd14775c083, type: 3}
   decayedFoodSprites: []
   resultsScreen: {fileID: 1290739496834212}
 --- !u!114 &114227111503611842

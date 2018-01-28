@@ -37,10 +37,90 @@ public class GameController : MonoBehaviour {
 	}
 
     //called from the bingo board when someone has won!!!
-    public void PlayerWon(int playerNum)
+    public void PlayerWon(int playerNum, FoodItem.FoodTypes[] winningfoods)
     {
         resultsScreen.SetActive(true);
-        resultsScreen.GetComponentInChildren<Text>().text = "Player " + (playerNum + 1) + " won!!";
+
+        string winningDescription = ProcessWinningFood(winningfoods);
+
+        resultsScreen.GetComponentInChildren<Text>().text = "Player " + (playerNum + 1) + " won!!\nYou made a" + winningDescription + " souffle!";
+    }
+
+
+
+    private string ProcessWinningFood(FoodItem.FoodTypes[] thefoods)
+    {
+        string res = "";
+
+        res = " " + replaceTier(thefoods[0]);
+
+        string second = res;
+
+        int i = 1;
+        
+        while (second == res)
+        {
+            second = replaceTier(thefoods[i]);
+            i++;
+
+            if (i >= 5)
+            {
+                second = "";
+            }
+        }
+
+        if (second != " plain")
+            res = res + second;
+
+
+        return res;
+    }
+
+
+    private string replaceTier(FoodItem.FoodTypes thefood)
+    {
+        string res = "";
+
+        switch (thefood)
+        {
+            case FoodItem.FoodTypes.pepper:
+            case FoodItem.FoodTypes.paprika:
+                res = " spicy";
+                break;
+
+            case FoodItem.FoodTypes.potato:
+            case FoodItem.FoodTypes.sweetpotato:
+                res = " starchy";
+                break;
+            case FoodItem.FoodTypes.raspberry:
+            case FoodItem.FoodTypes.strawberry:
+            case FoodItem.FoodTypes.apple:
+            case FoodItem.FoodTypes.lemon:
+                res = " fruity";
+                break;
+            case FoodItem.FoodTypes.nutmeg:
+            case FoodItem.FoodTypes.cinnamon:
+                res = " spiced";
+                break;
+            case FoodItem.FoodTypes.oregano:
+            case FoodItem.FoodTypes.parsley:
+                res = " seasoned";
+                break;
+            case FoodItem.FoodTypes.chocolate:
+            case FoodItem.FoodTypes.crab:
+            case FoodItem.FoodTypes.cheese:
+            case FoodItem.FoodTypes.vinegar:
+                res = " " + thefood.ToString();
+                break;
+            
+
+            default:
+                res = " plain";
+                break;
+        }
+
+
+        return res;
     }
 	
 	// Update is called once per frame

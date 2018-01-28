@@ -310,7 +310,7 @@ InputManager:
     axis: 2
     joyNum: 1
   - serializedVersion: 3
-    m_Name: P1AimVericalMac
+    m_Name: P1AimVerticalMac
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
