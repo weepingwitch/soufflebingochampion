@@ -308,11 +308,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4119127824993138, guid: 277569d50f850984aa28ec8a5eb71d9f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114844411458306954, guid: 277569d50f850984aa28ec8a5eb71d9f,
         type: 2}
       propertyPath: moveDirect.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114844411458306954, guid: 277569d50f850984aa28ec8a5eb71d9f,
+        type: 2}
+      propertyPath: movingRight
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

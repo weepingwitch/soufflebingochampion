@@ -6,15 +6,35 @@ public class FoodSpawner : MonoBehaviour {
 
 
     [SerializeField]
-    private GameObject foodBase, conveyerSpotBase;
+    private GameObject foodBase, conveyerSpotBase, beltImage;
     [SerializeField]
+    private bool movingRight;
+
     private Vector3 moveDirect;
+
+    [SerializeField]
+    private float conveyerLength;
+
+
 
     private int foodcount;
 
 	// Use this for initialization
 	void Start () {
         InvokeRepeating("SpawnAFood", .2f, 1f);
+
+
+        beltImage.transform.localScale = new Vector3(conveyerLength, 1);
+        int movefactor = -1;
+        
+        if (movingRight)
+        {
+            movefactor = 1;
+        }
+        moveDirect = new Vector3(movefactor, 0);
+        beltImage.transform.localPosition = new Vector3(((conveyerLength / 2f)-.5f)*movefactor, 0, 0);
+
+
 	}
 	
 	// Update is called once per frame
@@ -26,7 +46,7 @@ public class FoodSpawner : MonoBehaviour {
     private void SpawnAFood()
     {
         var conveySpot = Instantiate(conveyerSpotBase);
-        conveySpot.transform.position = transform.position;
+        conveySpot.transform.position = transform.position + new Vector3(0,.5f,0);
         foodcount++;
         if (foodcount > 1)
         {
@@ -36,7 +56,7 @@ public class FoodSpawner : MonoBehaviour {
             spawnedFood.GetComponent<FoodItem>().SetRandom();
         }
         
-        conveySpot.GetComponent<ConveyerSpot>().StartMoving(moveDirect, 14f);
+        conveySpot.GetComponent<ConveyerSpot>().StartMoving(moveDirect, conveyerLength);
     }
 
 }
