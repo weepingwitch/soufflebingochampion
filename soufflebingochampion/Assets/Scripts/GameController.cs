@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
 
 
     [SerializeField]
-    private GameObject resultsScreen;
+    private GameObject resultsScreen, ovenstatus1, ovenstatus2;
 
     private InputManager im;
 
@@ -44,6 +44,8 @@ public class GameController : MonoBehaviour {
     {
         //MusicManager.instance.VictoryMX(1);
         Time.timeScale = 0f;
+        ovenstatus1.SetActive(false);
+        ovenstatus2.SetActive(false);
     }
 
 
