@@ -23,6 +23,7 @@ public class ConveyerSpot : MonoBehaviour {
         moveVect = direct;
         isMoving = true;
         moveDistance = newMoveDist;
+        Debug.Log(moveDistance);
     }
 	
 	// Update is called once per frame
