@@ -28,7 +28,7 @@ public class FoodSpawner : MonoBehaviour {
         var conveySpot = Instantiate(conveyerSpotBase);
         conveySpot.transform.position = transform.position;
         foodcount++;
-        if (foodcount > 2)
+        if (foodcount > 1)
         {
             foodcount = 0;
             var spawnedFood = Instantiate(foodBase, conveySpot.transform);
