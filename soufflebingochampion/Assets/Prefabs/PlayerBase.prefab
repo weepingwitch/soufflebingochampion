@@ -267,6 +267,11 @@ MonoBehaviour:
   foodBase: {fileID: 1813284550702038, guid: f61ecf6d1c87c1847baa0d004f83aa5d, type: 2}
   whisk: {fileID: 21300000, guid: 22dfde2767e8ae4488aeae3b2a0f16d0, type: 3}
   spatula: {fileID: 21300000, guid: 88a1060df4644804cad6a77486193d40, type: 3}
+  dirtySpriteArray:
+  - {fileID: 21300000, guid: 6a844226d5b4e594892acdc916fa3e0b, type: 3}
+  - {fileID: 21300000, guid: 0b15c4b2660150745a49ccc9f4116ae7, type: 3}
+  - {fileID: 21300000, guid: 4a2349f60da85be48ad20cf5e5d6b587, type: 3}
+  - {fileID: 21300000, guid: d6b7a31d0203d6143bbc47fd6449e445, type: 3}
 --- !u!212 &212297551325960864
 SpriteRenderer:
   m_ObjectHideFlags: 1
