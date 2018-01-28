@@ -14,6 +14,9 @@ public class SoundManager : MonoBehaviour {
 	//Quick access to all AudioClips here
 	//_______________________________________________________
 	public AudioClip[] foodImpact; //place FoodImpact sfx here
+	public AudioClip eggCrabImpact;
+	public AudioClip smallGlassImpact;
+	public AudioClip largeGlassImpact;
 
 	public AudioClip[] p1Throw; //P1FoodThrow sfx
 	public AudioClip[] p2Throw; //P2FoodThrow sfx
