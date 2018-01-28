@@ -46,7 +46,7 @@ public class MusicManager : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		//check if insance of MusicManager exists, if so, destroy this instance
 		if (instance == null) {			
 			instance = this;			

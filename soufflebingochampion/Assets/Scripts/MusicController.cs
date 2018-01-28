@@ -24,7 +24,6 @@ public class MusicController : MonoBehaviour {
 
 
 
-
 		if (Input.GetKeyDown ("z")) {
 			MusicManager.instance.MainLayer2 ();
 		}
