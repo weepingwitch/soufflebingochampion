@@ -113,37 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &374023575
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4529916703125504, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1781685418961234, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_Name
-      value: Stove0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114584408026107196, guid: ce90e677ee7c59a42b5b64fec25fd32d,
-        type: 2}
-      propertyPath: myBoard
-      value: 
-      objectReference: {fileID: 1970005683}
-    - target: {fileID: 4529916703125504, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4529916703125504, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &490563081
 Prefab:
   m_ObjectHideFlags: 0
@@ -153,7 +122,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4026390606493770, guid: ea0af7e113bb5884880d73b16c8be4df, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4026390606493770, guid: ea0af7e113bb5884880d73b16c8be4df, type: 2}
       propertyPath: m_LocalPosition.y
@@ -199,7 +168,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4026390606493770, guid: ea0af7e113bb5884880d73b16c8be4df, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4026390606493770, guid: ea0af7e113bb5884880d73b16c8be4df, type: 2}
       propertyPath: m_LocalPosition.y
@@ -341,7 +310,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694108534830486, guid: 277569d50f850984aa28ec8a5eb71d9f, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114844411458306954, guid: 277569d50f850984aa28ec8a5eb71d9f,
         type: 2}
@@ -441,41 +410,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1436117437
+--- !u!1001 &1284769438
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4529916703125504, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1781685418961234, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
+    - target: {fileID: 1233288852598500, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
       propertyPath: m_Name
-      value: Stove1
+      value: Oven0
       objectReference: {fileID: 0}
-    - target: {fileID: 114584408026107196, guid: ce90e677ee7c59a42b5b64fec25fd32d,
-        type: 2}
-      propertyPath: ownerNum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114584408026107196, guid: ce90e677ee7c59a42b5b64fec25fd32d,
+    - target: {fileID: 114693368170718328, guid: af63ab8509375ab41bdd59dc881d6a9c,
         type: 2}
       propertyPath: myBoard
       value: 
-      objectReference: {fileID: 890264195}
-    - target: {fileID: 4529916703125504, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 7.5
+      objectReference: {fileID: 1970005683}
+    - target: {fileID: 4847437680318442, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 4529916703125504, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
+    - target: {fileID: 4847437680318442, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: ce90e677ee7c59a42b5b64fec25fd32d, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1439019783
 GameObject:
@@ -555,7 +515,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4694108534830486, guid: 277569d50f850984aa28ec8a5eb71d9f, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114844411458306954, guid: 277569d50f850984aa28ec8a5eb71d9f,
         type: 2}
@@ -573,6 +533,38 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 277569d50f850984aa28ec8a5eb71d9f, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1857229016
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1233288852598500, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
+      propertyPath: m_Name
+      value: Oven1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693368170718328, guid: af63ab8509375ab41bdd59dc881d6a9c,
+        type: 2}
+      propertyPath: ownerNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693368170718328, guid: af63ab8509375ab41bdd59dc881d6a9c,
+        type: 2}
+      propertyPath: myBoard
+      value: 
+      objectReference: {fileID: 890264195}
+    - target: {fileID: 4847437680318442, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847437680318442, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: af63ab8509375ab41bdd59dc881d6a9c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1970005682
 Prefab:
