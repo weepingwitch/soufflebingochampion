@@ -6,7 +6,7 @@ public class ConveyerSpot : MonoBehaviour {
 
 
     private Vector3 origPosition;
-    private Vector3 moveVect;
+    public Vector3 moveVect;
     private float moveSpeed = 1;
     private bool isMoving = false;
     private float moveDistance;

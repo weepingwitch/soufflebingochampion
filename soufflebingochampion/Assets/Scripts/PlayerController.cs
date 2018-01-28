@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        transform.position = (new Vector2(Mathf.Clamp(transform.position.x, -8.5f, 8.5f), Mathf.Clamp(transform.position.y, -4.25f, 4.25f)));
+
+
         //handle movement
         Vector2 movevect = im.getPlayerMove(playerNum);
         rb2d.velocity = movevect * moveSpeed;
@@ -167,6 +170,10 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+
+
+        
+
 	}
 
     //this will happen for other players
@@ -184,19 +191,52 @@ public class PlayerController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("fooditem"))
         {
+            
+           
             var theFood = collision.gameObject.GetComponent<FoodItem>();
             //if it is still an active food
             if (theFood != null)
             {
-                if (!theFood.isbeingthrown && canDoAction)
+               // Debug.Log("food hit " + playerNum + theFood.owner);
+                if (!theFood.isBeingThrown )
                 {
-                    pickupFood(theFood);
+                    if (theFood.owner != -1 && theFood.owner != playerNum)
+                    {
+                     //   Debug.Log("can't stun " + theFood.isBeingThrown + playerNum + theFood.owner + theFood.canBounce);
+                    }
+                    
+                   if (canDoAction)
+                    {
+                        pickupFood(theFood);
+                       // Debug.Log("regular non thrown pickup " + playerNum);
+                    }
+                    
                 }
-                else
+               else
                 {
+                 //   Debug.Log("hit by food " + playerNum);
+                    if (theFood.owner != playerNum)
+                    {
+                      //  Debug.Log("stunned " + playerNum);
 
-                    Vector3 stunDirect = transform.position - collision.gameObject.transform.position;
-                    DoStun(theFood, stunDirect);
+                        Vector3 stunDirect = transform.position - collision.gameObject.transform.position;
+                        DoStun(theFood, stunDirect);
+                    }
+                    else
+                    {
+                    //    Debug.Log("can't be hit by own food " + playerNum);
+                        if (theFood.owner == playerNum )
+                        {
+                     //       Debug.Log("food was pickuppable");
+                            var success = pickupFood(theFood);
+                            if (!success)
+                            {
+                          //      Debug.Log("calling hit from not picking up");
+                                theFood.doBounce();
+                            }
+                        }
+                    }
+                    
                 }
            
             }
@@ -210,31 +250,41 @@ public class PlayerController : MonoBehaviour {
     }
 
     //called when hit by a food
-    private void DoStun(FoodItem hitfood, Vector3 stunDirect)
+    public void DoStun(FoodItem hitFood, Vector3 stunDirect)
     {
-
-        hitfood.doSplat(true);
-
-        if (holdingFood)
+        if (hitFood.owner != playerNum)
         {
-            dropOffset = -stunDirect/2f;
-            doThrow(Vector2.zero, true);
+
+            hitFood.doSplat(true);
+
+            if (holdingFood)
+            {
+                dropOffset = -stunDirect / 2f;
+                doThrow(Vector2.zero, true);
+            }
+
+
+            canDoAction = false;
+            pushDirect = stunDirect * 8f;
+            pushcount = .25f;
+
         }
-
-
-        canDoAction = false;
-        pushDirect = stunDirect*8f;
-        pushcount = .25f;
+        else
+        {
+            pickupFood(hitFood);
+        }
+        
        
     }
 
 
-    private void pickupFood(FoodItem newfood)
+    private bool pickupFood(FoodItem newfood)
     {
 
         if (holdingFood)
         {
             //lol too bad
+            return false;
         }
         else
         {
@@ -243,6 +293,7 @@ public class PlayerController : MonoBehaviour {
             heldItemImg.sprite = gc.foodSprites[(int)heldFood];
             //Debug.Log(playerNum + " picked up a " + heldFood);
             Destroy(newfood.gameObject);
+            return true;
         }
 
     }
@@ -251,15 +302,8 @@ public class PlayerController : MonoBehaviour {
     private void doThrow(Vector2 throwdirect, bool isdropped = false)
     {
         var thrown = Instantiate(foodBase);
-        thrown.transform.position = heldItemImg.transform.position + (Vector3)throwdirect/2f ;
-        if (playerNum == 0)
-        {
-            thrown.layer = 8;
-        }
-        else
-        {
-            thrown.layer = 9;
-        }
+        thrown.transform.position = transform.position + (Vector3)throwdirect * 1.5f;
+        
         var foodc = thrown.GetComponent<FoodItem>();
         foodc.SetFoodType(heldFood,isdropped);
         foodc.owner = playerNum;
