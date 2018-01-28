@@ -41,6 +41,12 @@ public class Oven : MonoBehaviour {
         {
             case BingoBoard.MatchResult.success:
                 StartCoroutine(ShowPopup(successMark, popupDuration));
+                AudioClip sfx;
+                if (ownerNum == 0)
+                    sfx = SoundManager.instance.p1DeliverFood;
+                else
+                    sfx = SoundManager.instance.p2DeliverFood;
+                GetComponent<AudioSource>().PlayOneShot(sfx);
                 break;
             case BingoBoard.MatchResult.repeat:
                 statusMessage.GetComponentInChildren<Text>().text = "Ingredient already added";
