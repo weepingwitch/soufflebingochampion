@@ -6,13 +6,14 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour {
 
-	/* List of functions:
+	/* List of functions (all are for random clip selection w/o repetition):
 	 * 
 	 * FoodImpact() 
 	 * P1Throw() 
 	 * P2Throw()
 	 * FoodRot()
 	 * Slip()
+	 * FoodBounce()
 	 */
 
 
@@ -39,6 +40,8 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip[] slip; //slip sfx
 
 	public AudioClip pickup; //foodPickup
+
+	public AudioClip[] foodBounce; //FoodBounce sfx
 
 
 	void Awake () {
@@ -126,6 +129,21 @@ public class SoundManager : MonoBehaviour {
 			}
 		}
 		clip = slip[randClip];
+		lastClip = randClip;
+		return clip;
+	}
+
+	//Call to select random foodBounce sfx
+	public AudioClip FoodBounce(){
+		AudioClip clip;
+		int lastClip = -1;
+		int randClip = Random.Range (0, foodBounce.Length - 1); 
+		if (randClip == lastClip) {
+			while (randClip == lastClip) {
+				randClip = Random.Range (0, foodBounce.Length - 1);
+			}
+		}
+		clip = foodBounce[randClip];
 		lastClip = randClip;
 		return clip;
 	}

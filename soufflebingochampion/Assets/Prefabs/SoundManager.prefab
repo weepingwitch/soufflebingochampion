@@ -80,3 +80,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a5c8611622b3342e2b2923fd5d408ae4, type: 3}
   - {fileID: 8300000, guid: bd55dd82cda224968bbbf9d5116ec88d, type: 3}
   pickup: {fileID: 8300000, guid: 8bdc9c1c725c545e3b5c9c69360fbccd, type: 3}
+  foodBounce:
+  - {fileID: 8300000, guid: c2236cbd04584497ea35ad8acad70555, type: 3}
+  - {fileID: 8300000, guid: 75fd1b59e898445e1bc97a7640217921, type: 3}
+  - {fileID: 8300000, guid: f098c60b2953d4227a1d8cb5b62f149f, type: 3}
