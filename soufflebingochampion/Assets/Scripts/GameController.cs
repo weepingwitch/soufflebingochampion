@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
     {
         string res = "";
 
-        res = " " + replaceTier(thefoods[0]);
+        res =  replaceTier(thefoods[0]);
 
         string second = res;
 
@@ -73,6 +73,8 @@ public class GameController : MonoBehaviour {
             res = res + second;
 
 
+        
+
         return res;
     }
 
@@ -83,6 +85,9 @@ public class GameController : MonoBehaviour {
 
         switch (thefood)
         {
+            case FoodItem.FoodTypes.gummyworms:
+                res = " gummy worm";
+                break;
             case FoodItem.FoodTypes.pepper:
             case FoodItem.FoodTypes.paprika:
                 res = " spicy";

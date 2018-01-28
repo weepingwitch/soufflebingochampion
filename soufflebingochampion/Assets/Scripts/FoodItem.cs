@@ -7,7 +7,7 @@ public class FoodItem : MonoBehaviour {
     public enum FoodTypes { flour, butter, eggs, milk, cream, salt, sugar,
         vanilla, nuts, vinegar, oregano, parsley, nutmeg, cinnamon, cheese,
         apple, strawberry, raspberry, lemon, potato, sweetpotato, crab,
-        chocolate, pepper, paprika }
+        chocolate, pepper, paprika, gummyworms }
 
     private FoodTypes current_food;
 
