@@ -13,9 +13,12 @@ public class GameController : MonoBehaviour {
 
 
     [SerializeField]
-    private GameObject resultsScreen;
+    private GameObject resultsScreen, ovenstatus1, ovenstatus2;
 
     private InputManager im;
+
+    private int successLevel;
+    private float successPct;
 
     //set the static instance, make sure there is only one
     private void Awake()
@@ -33,12 +36,55 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         im = InputManager.instance;
-		
+        MusicManager.instance.MainMX();
+        //Invoke("freezeTime", 2f);	
 	}
+
+    void freezeTime()
+    {
+        //MusicManager.instance.VictoryMX(1);
+        Time.timeScale = 0f;
+        ovenstatus1.SetActive(false);
+        ovenstatus2.SetActive(false);
+    }
+
+
+
+    public void doSuccess()
+    {
+        successPct += .3f;
+        if (successPct >= 1f)
+        {
+            successPct -= 1f;
+            successLevel++;
+            switch (successLevel)
+            {
+                case 1:
+                    MusicManager.instance.MainLayer2();
+                    break;
+
+                case 2:
+                    MusicManager.instance.MainLayer3();
+                    break;
+                case 3:
+                    MusicManager.instance.MainLayer4();
+                    break;
+                case 4:
+                    MusicManager.instance.MainLayer5();
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+    }
 
     //called from the bingo board when someone has won!!!
     public void PlayerWon(int playerNum, FoodItem.FoodTypes[] winningfoods)
     {
+
+        freezeTime();
+        MusicManager.instance.VictoryMX(playerNum);
         resultsScreen.SetActive(true);
 
         string winningDescription = ProcessWinningFood(winningfoods);

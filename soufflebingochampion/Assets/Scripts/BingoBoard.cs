@@ -15,6 +15,8 @@ public class BingoBoard : MonoBehaviour {
 
     private List<FoodItem.FoodTypes> winningfoods;
 
+    public enum MatchResult { success, repeat, failure }
+
     [SerializeField]
     private int myId;
 
@@ -49,7 +51,7 @@ public class BingoBoard : MonoBehaviour {
         //DebugPrintGoal();
 
         //AddItem(FoodItem.FoodTypes.a);
-        //DebugPrintBoard(myboard);
+        //DebugPrintBoard(myBoard);
 
 	}
 
@@ -61,26 +63,32 @@ public class BingoBoard : MonoBehaviour {
 
 
     //called to add an ingredient to the bingo board
-    public bool AddItem(FoodItem.FoodTypes newitem)
+    public MatchResult AddItem(FoodItem.FoodTypes newitem)
     {
-        bool res = false;
+        bool match = false;
         //compare new food to goal board, mark spot as completed if match
         for (int i = 0; i < goalboard.Length; i++)
         {
             if (newitem == goalboard[i])
             {
+                // repeat match
+                if (myBoard.Get(i))
+                {
+                    return MatchResult.repeat;
+                }
                 myBoard.Set(i, true);
                 squares[i].markFilled();
-                res = true;
+                match = true;
+                break;
             }
         }
-        
+
         //check if there is a bingo
-        if (CheckForBingo())
+        if (match && CheckForBingo())
         {
             DoWin();
         }
-        return res;
+        return match ? MatchResult.success : MatchResult.failure;
 
     }
 
@@ -161,7 +169,7 @@ public class BingoBoard : MonoBehaviour {
             cursolution = ConvertBitArray(solutions[i]);
             if (cursolution == (mycardint & cursolution))
             {
-                //DebugPrintBoard(myboard);
+                //DebugPrintBoard(myBoard);
                 //DebugPrintBoard(solutions[i]);
                 // DebugPrintBoard(ConvertBitArray(new BitArray((mycardint & cursolution)));
 

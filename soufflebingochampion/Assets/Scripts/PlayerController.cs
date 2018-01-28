@@ -18,6 +18,13 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer pimg, aimIndicator, heldItemImg;
     [SerializeField]
     private GameObject foodBase;
+    [SerializeField]
+    private Sprite whisk, spatula;
+    [SerializeField]
+    private Sprite[] dirtySpriteArray;
+
+    private GameObject dirtySprite;
+    private GameObject dirtySprite2;
 
 
     private Vector2 aim = Vector2.right;
@@ -36,6 +43,8 @@ public class PlayerController : MonoBehaviour {
 
     private Vector2 pushDirect;
     private float pushcount;
+
+    private float dirtyAmt;
    
 
     private bool readyToThrow = true;
@@ -57,10 +66,12 @@ public class PlayerController : MonoBehaviour {
         if (playerNum == 0)
         {
             gameObject.layer = 8;
+            aimIndicator.sprite = whisk;
         }
         else
         {
             gameObject.layer = 9;
+            aimIndicator.sprite = spatula;
            
         }
 
@@ -170,11 +181,76 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        if (dirtyAmt > 0)
+        {
+            dirtyAmt -= (Time.deltaTime / 8f);
+        }
 
-
+        handleDirtySprites();
         
 
 	}
+
+    private void handleDirtySprites()
+    {
+
+
+        dirtyAmt = Mathf.Clamp(dirtyAmt, 0, 4.5f);
+        if (dirtySprite == null)
+        {
+            dirtySprite = new GameObject("ds1");
+            dirtySprite.AddComponent<SpriteRenderer>();
+            
+            dirtySprite.transform.parent = transform;
+        }
+        if (dirtySprite2 == null)
+        {
+            dirtySprite2 = new GameObject("ds2");
+            dirtySprite2.AddComponent<SpriteRenderer>();
+            
+            dirtySprite2.transform.parent = transform;
+            
+        }
+        dirtySprite.transform.position = transform.position;
+        dirtySprite2.transform.position = transform.position;
+        dirtySprite2.GetComponent<SpriteRenderer>().sortingLayerName = "AIMINDICATOR";
+        dirtySprite.GetComponent<SpriteRenderer>().sortingLayerName = "AIMINDICATOR";
+        int ds1 = Mathf.FloorToInt(dirtyAmt);
+        int ds2 = Mathf.Min(4, Mathf.CeilToInt(dirtyAmt));
+
+        if (ds2 == 4 || ds1 == 4)
+        {
+            dirtySprite2.SetActive(false);
+            dirtySprite.GetComponent<SpriteRenderer>().sprite = dirtySpriteArray[3];
+            return;
+        }
+        if (ds1 <= 0)
+        {
+            dirtySprite.SetActive(false);
+            dirtySprite2.SetActive(true);
+            dirtySprite2.GetComponent<SpriteRenderer>().sprite = dirtySpriteArray[ds2];
+            dirtySprite2.GetComponent<SpriteRenderer>().color = Color.Lerp(new Color(1f, 1f, 1f, 0f), Color.white, dirtyAmt);
+
+
+        }
+        else
+        {
+            dirtySprite.SetActive(true);
+            dirtySprite2.SetActive(true);
+            dirtySprite.GetComponent<SpriteRenderer>().sprite = dirtySpriteArray[ds1];
+            dirtySprite.GetComponent<SpriteRenderer>().color = Color.Lerp(new Color(1f, 1f, 1f, 0f), Color.white, dirtyAmt-ds1);
+            dirtySprite2.GetComponent<SpriteRenderer>().sprite = dirtySpriteArray[ds2];
+            dirtySprite2.GetComponent<SpriteRenderer>().color = Color.Lerp(new Color(1f, 1f, 1f, 0f), Color.white, 1-(ds2-dirtyAmt));
+
+
+
+
+        }
+
+
+
+
+    }
 
     //this will happen for other players
     private void OnCollisionStay2D(Collision2D collision)
@@ -245,6 +321,12 @@ public class PlayerController : MonoBehaviour {
         {
             //Debug.Log("slipping!");
             canDoAction = false;
+            if (!GetComponent<AudioSource>().isPlaying)
+            {
+                AudioClip sfx = SoundManager.instance.Slip();
+                GetComponent<AudioSource>().PlayOneShot(sfx);
+            }
+           
             slideCountdown = .05f;
         }
         if (collision.gameObject.CompareTag("shards"))
@@ -267,7 +349,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (hitFood.owner != playerNum)
         {
-
+            dirtyAmt += 1f;
             hitFood.doSplat(true);
 
             if (holdingFood)
@@ -306,6 +388,8 @@ public class PlayerController : MonoBehaviour {
             heldItemImg.sprite = gc.foodSprites[(int)heldFood];
             //Debug.Log(playerNum + " picked up a " + heldFood);
             Destroy(newfood.gameObject);
+            AudioClip sfx = SoundManager.instance.pickup;
+            GetComponent<AudioSource>().PlayOneShot(sfx);
             return true;
         }
 
@@ -323,6 +407,14 @@ public class PlayerController : MonoBehaviour {
         if (!isdropped)
         {
             foodc.throwfood(throwdirect * throwStrength);
+
+            AudioClip sfx;
+            if (playerNum == 0)
+                sfx = SoundManager.instance.P1Throw();
+            else
+                sfx = SoundManager.instance.P2Throw();
+            GetComponent<AudioSource>().PlayOneShot(sfx);
+
         }
         else
         {

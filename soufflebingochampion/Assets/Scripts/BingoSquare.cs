@@ -62,7 +62,6 @@ public class BingoSquare : MonoBehaviour {
 
     }
 
-
     //mark the spot as filled
     public void markFilled()
     {
